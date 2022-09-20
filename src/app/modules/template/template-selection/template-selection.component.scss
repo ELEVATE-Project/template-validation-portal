@@ -1,0 +1,172 @@
+
+
+.shiksha-logo {
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.download-horizontal {
+  height: 30px;
+}
+
+.template-sections {
+  padding-top:12px;
+}
+
+.tempplate-download {
+  width: 16%;
+  height: 40px;
+  padding-left: 40px;
+  border-radius: 20px;
+  background-color: #8b0000;
+  color: white;
+  position: absolute;
+  clip: rect(11px, 287px, 200px, 0px);
+  margin-top: -40px;
+}
+
+.download-section {
+  margin-top:1%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -8px;
+  } 
+  .templates-text {
+    padding-left: 37%;
+    padding-top: 50px;
+    color:grey
+  }
+
+  .select-button {
+    border:solid 1px #bcb7b7;
+    border-radius: 20px;
+    padding:4px 36px;
+  }
+  .download-button {
+    border-radius: 20px;
+    background-color: #18b528;
+    padding:0 70px;
+    color: white;
+    margin-top: 9px;
+  }
+
+  .upload-horizontal {
+    height: 30px;
+  }
+
+  .upload-hr {
+    margin-top: 10%;
+  }
+
+  .tempplate-upload {
+    width: 16%;
+    height: 40px;
+    padding-left: 40px;
+    border-radius: 20px;
+    background-color: #8b0000;
+    color: white;
+    position: absolute;
+    clip: rect(10px, 287px, 200px, 0px);
+    margin-top: -40px;
+  }
+
+  .select-div {
+    padding-top: 17px;
+  }
+
+  .upload-div {
+    margin-top: 10px;
+  }
+
+  .select-file {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    height: 55px;
+    margin-left: 25%;
+    border-radius: 20px;
+    border:solid 1px #bcb7b7;
+    margin-top: 5%;
+    box-shadow: rgba(0, 0, 0, 0.15) 3px 6px 3px 0px;
+  }
+
+  .upload-button {
+    border-radius: 20px;
+    background-color: #8b0000;
+    padding:0 35px;
+    color: white;
+  }
+
+  .upload-col {
+    color: white !important;
+  }
+
+
+  ::ng-deep .mat-select-panel-wrap {
+    position: absolute;
+    top: 46px !important;
+}
+
+// Dropdown
+.container-dropdown {
+    height: 85%;
+    width: 315%;
+    background-color: #8b0000;;
+    border-radius: 18px;
+}
+
+label.dropbtn {
+  height: 30px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.dropdown {
+  color: white;
+}
+.dropdown-content p {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-indent: 20px;
+}
+.dropdown-content p:hover {
+  background-color: lightgrey;
+}
+.dropdown-content {
+  display: none;
+}
+.dropdown-content label {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  color: rgb(60 60 60);;
+}
+input:checked ~ .dropdown .dropdown-content {
+  position: absolute;
+  display: block;
+  min-width: 160px;
+  top: 77%;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+}
+input:checked ~ .dropdown .overlay {
+  position: absolute;
+  display: block;
+  // width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 190;
+}
+
+.uploads {
+  // margin-left: 20px;
+  padding-top: 7px;
+  text-align: center;
+}
