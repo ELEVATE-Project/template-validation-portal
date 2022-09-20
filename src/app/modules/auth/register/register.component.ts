@@ -7,6 +7,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
   hideconformpassword: boolean = false;
   form: FormGroup = new FormGroup({});
   public registerForm: FormGroup = this.fb.group({
-    name: ['', [Validators.pattern(/\s/), Validators.required]],
+    name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private router:Router) {}
 
   ngOnInit() {}
 
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
     } else {
       alert('Passwords do not match');
     }
+    this.router.navigate(['/auth/login'])
   }
 }
 
