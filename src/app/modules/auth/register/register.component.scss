@@ -22,11 +22,8 @@ h2{
     font-weight: bold;
     font-size: 1.5rem;
 }
-.btn1{
-   background-color:  #8b0000cc;
-   color: white;
-}
-.btn2{
+
+.register_button{
     background-color: #008000b5;
     width: 75%;
     color: white;
@@ -52,37 +49,9 @@ h1{
 }
 
 
- ::ng-deep .mat-form-field {
-    .mat-form-field-wrapper{
-        padding-bottom: 0px;
-        margin: 0px;
-    }
-    // .mat-form-field-appearance-outline .mat-form-field-infix {
-    //     padding: 0px 0px 0px 0px;
-    //     margin: 0px;
-    // }
-    .mat-input-element{
-        color: black;
-    }
-    // .mat-form-field-can-float{
-    //     color: black;
-    // }
-    // .mat-form-field-has-label{
-    //     color: green;
-    // }
-    // .mat-form-field-hide-placeholder{
-    //     color: black;
-    // }
-    
-   
-}
-
-//  ::ng-deep .mat-input-element{
-//     color: black;
-//  }
-
-
-.div_btn2{
+.div_register_button{
     flex: 1 1 auto;
     text-align: center; 
 }
+
+
