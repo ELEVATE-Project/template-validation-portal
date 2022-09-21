@@ -1,83 +1,56 @@
-.body{
-    align-items: center;
-   
+.body {
+  align-items: center;
 }
-.login_card{
-    width: 25%;
-    box-shadow: 1px 1px 5px 5px rgb(216, 216, 216);
-}
-
-.login_form{
-    display: flex;
-    flex-direction: column;
-}
-.login_toolbar{
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 0%;
-    
-}
-.btn1{
-   background-color:  #8b0000cc;
-   color: white;
-}
-.btn2{
-    background-color: #008000b5;
-    width: 75%;
-    color: white;
-}
-.login{
-    height: 100%;
-background: #f7f7f7;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-   
+.login_card {
+  width: 25%;
+  box-shadow: 1px 1px 5px 5px rgb(216, 216, 216);
 }
 
-
-.login_elevate{
-  color: #008000b5;  
+.login_form {
+  display: flex;
+  flex-direction: column;
 }
-h1{
-    color:  #8b0000cc;
-    font-weight: bold;
-    font-size: 3rem;
+.login_toolbar {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 0%;
 }
-
-
- ::ng-deep .mat-form-field {
-    .mat-form-field-wrapper{
-        padding-bottom: 0px;
-        margin: 0px;
-    }
-    // .mat-form-field-appearance-outline .mat-form-field-infix {
-    //     padding: 0px 0px 0px 0px;
-    //     margin: 0px;
-    // }
-    .mat-input-element{
-        color: black;
-    }
-    // .mat-form-field-can-float{
-    //     color: black;
-    // }
-    // .mat-form-field-has-label{
-    //     color: green;
-    // }
-    // .mat-form-field-hide-placeholder{
-    //     color: black;
-    // }
-    
-   
+.login_button {
+  background-color: #8b0000cc;
+  color: white;
+}
+.login_button2 {
+  background-color: #008000b5;
+  width: 75%;
+  color: white;
+  text-align: center;
+}
+.login {
+  height: 100%;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-//  ::ng-deep .mat-input-element{
-//     color: black;
-//  }
+.login_elevate {
+  color: #008000b5;
+}
+h1 {
+  color: #8b0000cc;
+  font-weight: bold;
+  font-size: 3rem;
+}
 
-
-.div_btn2{
-    flex: 1 1 auto;
-    text-align: center; 
+.div_btn2 {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.login_forgotAccount {
+  text-align: center;
+  color: blue;
+}
+.login_forgotAccount:hover {
+  color: red;
 }

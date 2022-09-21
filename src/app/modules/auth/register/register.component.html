@@ -1,45 +1,63 @@
 <div class="register">
-    <div>
-        <h1>ELE<span class="login_elevate">VA</span>TE</h1>
-    </div><br>
-    <mat-card class="register_card">
-       
-        <form class="register_form">
-            <mat-toolbar> <span class="register_toolbar"><h2>Sign Up</h2></span></mat-toolbar>
-           
-            
-             <mat-form-field appearance="outline" class="my-form-field">
-                <!-- <mat-label>Email Address</mat-label>     -->
-              <input matInput placeholder="Name">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="my-form-field">
-                <!-- <mat-label>Email Address</mat-label>     -->
-              <input matInput placeholder="Email Address">
-            </mat-form-field>
-            <mat-form-field appearance="outline"  class="my-form-field">   
-                <!-- <mat-label>password</mat-label>     -->
-                <input matInput placeholder="Password" type="password">
-              </mat-form-field>
-              <mat-form-field appearance="outline"  class="my-form-field">   
-                <!-- <mat-label>password</mat-label>     -->
-                <input matInput placeholder="Conform Password" type="password">
-              </mat-form-field>
-              <br>
+  <div>
+    <h1>ELE<span class="login_elevate">VA</span>TE</h1>
+  </div><br>
+  <mat-card class="register_card">
 
-           <div class="div_btn2">
-            <button mat-raised-button type="submit" class="btn2" style="text-align:center">Sign Up</button>
-           </div>
-    
-          </form>
-          
-          
-    </mat-card>
+    <form class="register_form" (ngSubmit)="onRegister()" name="registerForm" [formGroup]="registerForm">
+      <mat-toolbar> <span class="register_toolbar">
+          <h2>Sign Up</h2>
+        </span></mat-toolbar>
+
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="name" name="name">
+        <mat-error *ngIf="!registerForm.controls['name'].valid">
+          Enter Full Name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" name="email">
+        <mat-error *ngIf="!registerForm.controls['email'].valid">
+          Enter Valid Email 
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" name="password" type="password" [type]=" hidepassword ?'text' : 'password'" required  placeholder="Enter valid password">
+        <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword" >
+          <mat-icon>
+            {{hidepassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </button>
+        <mat-error *ngIf="!registerForm.controls['password'].valid">
+          Enter Valid Password
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput formControlName="confirmPassword" name="confirmPassword" type="password" [type]=" hideconformpassword ?'text' : 'password'" required>
+        <button mat-icon-button matSuffix (click)="hideconformpassword = !hideconformpassword" >
+          <mat-icon>
+            {{hideconformpassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </button>
+        <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">Passwords do not match.</mat-error>
+        
+      </mat-form-field>
+
+
+      <div class="div_register_button">
+        <button mat-raised-button type="submit" class="register_button">Sign Up</button>
+      </div>
+
+    </form>
+
+
+  </mat-card>
 </div>
-
-
-
-
-
-
-
 

@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TemplateModule } from './modules/template/template.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { MaterialModule } from './material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { MaterialModule } from './material.module';
     SharedModule,
     TemplateModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
