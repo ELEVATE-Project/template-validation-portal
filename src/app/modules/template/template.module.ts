@@ -5,7 +5,7 @@ import { ValidationResultComponent } from './validation-result/validation-result
 import { TemplateSuccessComponent } from './template-success/template-success.component';
 import { MaterialModule } from 'src/app/material.module';
 import { TemplateRoutingModule } from './template.routing.module';
-
+import { TemplateReportComponent } from './template-report/template-report.component';
 
 
 @NgModule({
@@ -13,6 +13,7 @@ import { TemplateRoutingModule } from './template.routing.module';
     TemplateSelectionComponent,
     ValidationResultComponent,
     TemplateSuccessComponent,
+    TemplateReportComponent
   ],
   imports: [
     CommonModule,

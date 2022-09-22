@@ -1,0 +1,78 @@
+.shiksha-logo {
+  width: 20%;
+  height: 10%;
+}
+.download-horizontal {
+  height: 30px;
+}
+
+.template-sections {
+  padding-top: 15px;
+}
+.export_div {
+  padding-bottom: 20px;
+}
+
+.tempplate-download {
+  width: 12%;
+  height: 40px;
+  padding-left: 40px;
+  border-radius: 20px;
+  background-color: #8b0000;
+  color: white;
+  position: absolute;
+  clip: rect(11px, 287px, 200px, 0px);
+  margin-top: -40px;
+}
+.export_report_button {
+  display: flex;
+  flex-direction: column;
+}
+.download-section {
+  margin-top: 1%;
+}
+
+.flex-container {
+  display: flex;
+  padding-left: 30px;
+  margin-top: 10px;
+}
+.templates-text {
+  padding-top: 20px;
+  padding-left: 20px;
+  color: grey;
+}
+
+.select-button {
+  border: solid 1px #bcb7b7;
+  border-radius: 20px;
+  padding: 4px 36px;
+}
+
+.export-button {
+  border-radius: 20px;
+  background-color: #008000b5;
+  padding: 0 70px;
+  color: white;
+  margin-top: 9px;
+}
+.report-button {
+  border-radius: 20px;
+  background-color: #008000b5;
+  padding: 0 83px;
+  color: white;
+  margin-top: 9px;
+}
+::ng-deep .mat-select-panel-wrap {
+  position: absolute;
+  top: 46px !important;
+}
+
+.select-opt {
+  border-radius: 20px;
+  border: 1px solid grey;
+}
+::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: 0px 0px 0px 0px;
+  margin-left: -20px;
+}
