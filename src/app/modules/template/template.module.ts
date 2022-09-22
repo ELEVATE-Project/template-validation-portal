@@ -12,7 +12,7 @@ import { TemplateRoutingModule } from './template.routing.module';
   declarations: [
     TemplateSelectionComponent,
     ValidationResultComponent,
-    TemplateSuccessComponent
+    TemplateSuccessComponent,
   ],
   imports: [
     CommonModule,
