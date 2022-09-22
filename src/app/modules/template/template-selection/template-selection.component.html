@@ -15,13 +15,12 @@
         <div>
             <button mat-raised-button class="select-button">
                 <mat-select placeholder="Select Template">
-                    <mat-option *ngFor="let downloadTemplate of downloadTemplates" [value]="downloadTemplate">
+                    <mat-option *ngFor="let downloadTemplate of downloadTemplates" [value]="downloadTemplate" class="select-opt">
                         {{ downloadTemplate.name }}
                     </mat-option>
                 </mat-select>
             </button>
         </div>
-
         <div>&nbsp;&nbsp;&nbsp;
             <button (click)="templateDownload()" mat-raised-button class="download-button"> Download </button>
         </div>
@@ -37,27 +36,16 @@
     <div>
         <div class="select-file">
             <div class="select-div">
-                <p> Select File</p>
+                    <mat-select name="countryString" placeholder="Select File" class="matpanel">
+                        <mat-option *ngFor="let uploadTempplate of uploadTemplates" [value]="uploadTempplate" class="select-opt">
+                            <input type="file" accept=".xlsx" style="display: none;" #fileInput (change)="getFileDetails($event)" />
+                            <span (click)="fileUpload(fileInput)"> {{uploadTempplate}} </span>
+                        </mat-option>
+                    </mat-select>
             </div>
-            <div class="upload-div">
-                <div class="container-dropdown">
-                    <input style="display:none;" id="dropdownInput" type="checkbox"/>
-                    <div class="dropdown">
-                        <div class="uploads">
-                            <span class="">  </span>
-                            <label class="dropbtn" for="dropdownInput">
-                            <span class="m-auto ml1 small-font">{{sortableElement}}</span>
-                        </label>
-                        </div>
-                        <div class="dropdown-content">
-                            <p *ngFor="let uploadTemplate of uploadTemplates" (click)="setSortableElement(uploadTemplate)" for="dropdownInput">
-                                <input type="file" style="display: none;" #fileInput />
-                                <label for="dropdownInput" (click)=" fileUpload(fileInput) ">{{uploadTemplate}}</label>
-                            </p>
-                        </div>
-                        <label for="dropdownInput" class="overlay"></label>
-                    </div>
-                </div>
+            <div class="select-div"> {{fileName}}</div>
+            <div class="upload-div"> 
+                <button (click)="templateDownload()" mat-raised-button class="upload-button"> Upload </button>
             </div>
         </div>
     </div>
