@@ -101,68 +101,19 @@
     color: white;
   }
 
-  .upload-col {
-    color: white !important;
-  }
-
-
   ::ng-deep .mat-select-panel-wrap {
     position: absolute;
     top: 46px !important;
 }
 
-// Dropdown
-.container-dropdown {
-    height: 85%;
-    width: 315%;
-    background-color: #8b0000;;
-    border-radius: 18px;
-}
+  .select-opt {
+    border-radius: 20px;
+    border: 1px solid grey;
+  }
 
-label.dropbtn {
-  height: 30px;
-  background: none;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.dropdown {
-  color: white;
-}
-.dropdown-content p {
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  text-indent: 20px;
-}
-.dropdown-content p:hover {
-  background-color: lightgrey;
-}
-.dropdown-content {
-  display: none;
-}
-.dropdown-content label {
-  display: block;
-  width: 100%;
-  padding: 1rem 0;
-  color: rgb(60 60 60);;
-}
-input:checked ~ .dropdown .dropdown-content {
-  position: absolute;
-  display: block;
-  min-width: 160px;
-  top: 77%;
-  background-color: white;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 200;
-}
-input:checked ~ .dropdown .overlay {
-  position: absolute;
-  display: block;
-  // width: 100%;
-  height: 100%;
-  top: 0;
-  z-index: 190;
+::ng-deep .mat-select-panel:not([class*=mat-elevation-z]){
+  box-shadow: 0px 0px 0px 0px;
+  margin-left: -20px
 }
 
 .uploads {
