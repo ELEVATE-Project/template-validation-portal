@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,20 +23,29 @@ export class LoginComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder,private router:Router) {}
+  constructor(private fb: FormBuilder, private router: Router, 
+    private authService: AuthenticationService, private toastr: ToastrService) { }
 
-  ngOnInit() {}
- 
+  ngOnInit() { }
+
 
   onLogin() {
     if (!this.loginForm.valid) {
       return;
     }
-    this.router.navigate(['/template/template-selection'])
-    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value)
+      .subscribe((resp: any) => {
+        if (resp?.response?.accessToken) {
+          this.toastr.success('Login Successful','Success')
+          localStorage.setItem('token',resp?.response?.accessToken);
+          this.router.navigate(['/template/template-selection'])
+        }
+      }, (error: any) => {
+        this.toastr.error(error,'Error')
+      })
   }
 
-  goToRegister(){
+  goToRegister() {
     this.router.navigate(['/auth/register'])
   }
 
