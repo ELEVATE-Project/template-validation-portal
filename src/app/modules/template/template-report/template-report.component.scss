@@ -1,0 +1,48 @@
+.shiksha-logo {
+  width: 20%;
+  height: 10%;
+}
+
+.download-horizontal {
+  height: 30px;
+}
+
+.template-sections {
+  padding-top: 15px;
+}
+.tempplate-download {
+  width: 12%;
+  height: 40px;
+  padding-left: 40px;
+  border-radius: 20px;
+  background-color: #8b0000;
+  color: white;
+  position: absolute;
+  clip: rect(11px, 287px, 200px, 0px);
+  margin-top: -40px;
+}
+.export_report_button {
+  display: flex;
+  flex-direction: column;
+}
+.download-section {
+  margin-top: 1%;
+}
+
+.report-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.report-request,
+.report-success,
+.report-failed {
+  width: 40%;
+  border-radius: 20px;
+
+  color: rgb(0, 0, 0);
+  margin-top: 9px;
+}

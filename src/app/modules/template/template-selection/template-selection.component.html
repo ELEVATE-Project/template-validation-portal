@@ -1,5 +1,5 @@
 <div>
-    <h4 class="shiksha-logo">Shikshalokam Logo</h4>
+    <div> <img class="shiksha-logo" src="../../../../assets/Images/shikshalokam-logo.png" alt=""></div>
     <div class="download-horizontal">
         <hr>
     </div>
@@ -7,25 +7,26 @@
         <p class="template-sections"> Template Download Section </p>
     </div>
 
-   <div class="download-section">
-    <div class="templates-text">
-        <p > Templates</p>
-    </div>
-    <div class="flex-container"> 
-        <div>
-            <button mat-raised-button class="select-button">
-                <mat-select placeholder="Select Template">
-                    <mat-option *ngFor="let downloadTemplate of downloadTemplates" [value]="downloadTemplate" class="select-opt">
-                        {{ downloadTemplate.name }}
-                    </mat-option>
-                </mat-select>
-            </button>
+    <div class="download-section">
+        <div class="templates-text">
+            <p> Templates</p>
         </div>
-        <div>&nbsp;&nbsp;&nbsp;
-            <button (click)="templateDownload()" mat-raised-button class="download-button"> Download </button>
+        <div class="flex-container">
+            <div>
+                <button mat-raised-button class="select-button">
+                    <mat-select placeholder="Select Template">
+                        <mat-option *ngFor="let downloadTemplate of downloadTemplates" [value]="downloadTemplate"
+                            class="select-opt">
+                            {{ downloadTemplate.name }}
+                        </mat-option>
+                    </mat-select>
+                </button>
+            </div>
+            <div>&nbsp;&nbsp;&nbsp;
+                <button (click)="templateDownload()" mat-raised-button class="download-button"> Download </button>
+            </div>
         </div>
     </div>
-   </div>
 
     <div class="upload-horizontal">
         <hr class="upload-hr">
@@ -36,15 +37,17 @@
     <div>
         <div class="select-file">
             <div class="select-div">
-                    <mat-select name="countryString" placeholder="Select File" class="matpanel">
-                        <mat-option *ngFor="let uploadTempplate of uploadTemplates" [value]="uploadTempplate" class="select-opt">
-                            <input type="file" accept=".xlsx" style="display: none;" #fileInput (change)="getFileDetails($event)" />
-                            <span (click)="fileUpload(fileInput)"> {{uploadTempplate}} </span>
-                        </mat-option>
-                    </mat-select>
+                <mat-select name="countryString" placeholder="Select File" class="matpanel">
+                    <mat-option *ngFor="let uploadTempplate of uploadTemplates" [value]="uploadTempplate"
+                        class="select-opt">
+                        <input type="file" accept=".xlsx" style="display: none;" #fileInput
+                            (change)="getFileDetails($event)" />
+                        <span (click)="fileUpload(fileInput)"> {{uploadTempplate}} </span>
+                    </mat-option>
+                </mat-select>
             </div>
             <div class="select-div"> {{fileName}}</div>
-            <div class="upload-div"> 
+            <div class="upload-div">
                 <button (click)="templateDownload()" mat-raised-button class="upload-button"> Upload </button>
             </div>
         </div>

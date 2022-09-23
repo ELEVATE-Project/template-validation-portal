@@ -1,9 +1,6 @@
-
-
 .shiksha-logo {
-    padding-top: 20px;
-    padding-left: 40px;
-    padding-bottom: 40px;
+  width: 20%;
+  height: 10%;
 }
 
 .download-horizontal {
@@ -11,7 +8,7 @@
 }
 
 .template-sections {
-  padding-top:12px;
+  padding-top: 12px;
 }
 
 .tempplate-download {
@@ -27,93 +24,93 @@
 }
 
 .download-section {
-  margin-top:1%;
+  margin-top: 1%;
 }
 
 .flex-container {
-    display: flex;
-    justify-content: center;
-    margin-top: -8px;
-  } 
-  .templates-text {
-    padding-left: 37%;
-    padding-top: 50px;
-    color:grey
-  }
-
-  .select-button {
-    border:solid 1px #bcb7b7;
-    border-radius: 20px;
-    padding:4px 36px;
-  }
-  .download-button {
-    border-radius: 20px;
-    background-color: #18b528;
-    padding:0 70px;
-    color: white;
-    margin-top: 9px;
-  }
-
-  .upload-horizontal {
-    height: 30px;
-  }
-
-  .upload-hr {
-    margin-top: 10%;
-  }
-
-  .tempplate-upload {
-    width: 16%;
-    height: 40px;
-    padding-left: 40px;
-    border-radius: 20px;
-    background-color: #8b0000;
-    color: white;
-    position: absolute;
-    clip: rect(10px, 287px, 200px, 0px);
-    margin-top: -40px;
-  }
-
-  .select-div {
-    padding-top: 17px;
-  }
-
-  .upload-div {
-    margin-top: 10px;
-  }
-
-  .select-file {
-    display: flex;
-    justify-content: space-around;
-    width: 50%;
-    height: 55px;
-    margin-left: 25%;
-    border-radius: 20px;
-    border:solid 1px #bcb7b7;
-    margin-top: 5%;
-    box-shadow: rgba(0, 0, 0, 0.15) 3px 6px 3px 0px;
-  }
-
-  .upload-button {
-    border-radius: 20px;
-    background-color: #8b0000;
-    padding:0 35px;
-    color: white;
-  }
-
-  ::ng-deep .mat-select-panel-wrap {
-    position: absolute;
-    top: 46px !important;
+  display: flex;
+  justify-content: center;
+  margin-top: -8px;
+}
+.templates-text {
+  padding-left: 37%;
+  padding-top: 50px;
+  color: grey;
 }
 
-  .select-opt {
-    border-radius: 20px;
-    border: 1px solid grey;
-  }
+.select-button {
+  border: solid 1px #bcb7b7;
+  border-radius: 20px;
+  padding: 4px 36px;
+}
+.download-button {
+  border-radius: 20px;
+  background-color: #18b528;
+  padding: 0 70px;
+  color: white;
+  margin-top: 9px;
+}
 
-::ng-deep .mat-select-panel:not([class*=mat-elevation-z]){
+.upload-horizontal {
+  height: 30px;
+}
+
+.upload-hr {
+  margin-top: 10%;
+}
+
+.tempplate-upload {
+  width: 16%;
+  height: 40px;
+  padding-left: 40px;
+  border-radius: 20px;
+  background-color: #8b0000;
+  color: white;
+  position: absolute;
+  clip: rect(10px, 287px, 200px, 0px);
+  margin-top: -40px;
+}
+
+.select-div {
+  padding-top: 17px;
+}
+
+.upload-div {
+  margin-top: 10px;
+}
+
+.select-file {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  height: 55px;
+  margin-left: 25%;
+  border-radius: 20px;
+  border: solid 1px #bcb7b7;
+  margin-top: 5%;
+  box-shadow: rgba(0, 0, 0, 0.15) 3px 6px 3px 0px;
+}
+
+.upload-button {
+  border-radius: 20px;
+  background-color: #8b0000;
+  padding: 0 35px;
+  color: white;
+}
+
+::ng-deep .mat-select-panel-wrap {
+  position: absolute;
+  top: 46px !important;
+}
+
+.select-opt {
+  border-radius: 20px;
+  border: 1px solid grey;
+}
+
+::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
   box-shadow: 0px 0px 0px 0px;
-  margin-left: -20px
+  margin-left: -20px;
 }
 
 .uploads {

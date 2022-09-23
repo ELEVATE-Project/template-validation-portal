@@ -1,1 +1,51 @@
-<p>validation-result works!</p>
+<div>
+    <div > <img  class="shiksha-logo" src="../../../../assets/Images/shikshalokam-logo.png" alt=""></div>
+    <div class="download-horizontal">
+        <hr />
+    </div>
+    <div class="tempplate-download">
+        <p class="template-sections">Validation Result</p>
+    </div>
+
+    <div>
+        <div class="templates-text">
+            <p> Resource</p>
+        </div>
+        <div class="flex-container">
+            <div>
+                <button mat-raised-button class="select-button">
+                    <mat-select placeholder="Select Template" class="select_dropdown">
+                        <mat-option *ngFor="let downloadResource of downloadResources" [value]="downloadResource"
+                            class="select-opt">
+                            {{ downloadResource.name }}
+                        </mat-option>
+                    </mat-select>
+                </button>
+            </div>
+
+            <div class="export_report_div">
+                <div class="export_div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button (click)="export()" mat-raised-button class="export-button"> Export CSV </button>
+
+                </div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button mat-raised-button class="report-button"> Reports </button>
+                </div>
+
+
+            </div>
+            <div>
+                <table class="sjs-table">
+                    <tbody>
+                        <tr *ngFor="let row of data">
+                            <td *ngFor="let val of row">
+                                {{ val }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
