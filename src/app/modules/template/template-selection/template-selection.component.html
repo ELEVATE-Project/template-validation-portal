@@ -39,10 +39,10 @@
             <div class="select-div">
                 <mat-select name="countryString" placeholder="Select File" class="matpanel">
                     <mat-option *ngFor="let uploadTempplate of uploadTemplates" [value]="uploadTempplate"
-                        class="select-opt">
+                        class="select-opt" (click)="fileUpload(fileInput)">
                         <input type="file" accept=".xlsx" style="display: none;" #fileInput
                             (change)="getFileDetails($event)" />
-                        <span (click)="fileUpload(fileInput)"> {{uploadTempplate}} </span>
+                        <span > {{uploadTempplate}} </span>
                     </mat-option>
                 </mat-select>
             </div>
