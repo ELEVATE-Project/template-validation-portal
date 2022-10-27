@@ -24,13 +24,13 @@
   clip: rect(11px, 287px, 200px, 0px);
   margin-top: -40px;
 }
-.export_report_button {
+.export_report_div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .download_div{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   column-gap: 20px;
 }
 .download-section {
@@ -39,9 +39,11 @@
 
 .flex-container {
   display: flex;
-  padding-left: 2%;
-  width: 100%;
-  gap: 30px;
+  flex-direction: column;
+  padding: 2%;
+  width: 93%;
+  // gap: 83px;
+  // overflow-x: hidden
 }
 
 .templates-text {
@@ -61,14 +63,12 @@
   background-color: #008000b5;
   padding: 0 70px;
   color: white;
-  margin-top: 9px;
 }
 .report-button {
   border-radius: 20px;
   background-color: #008000b5;
   padding: 0 83px;
   color: white;
-  margin-top: 9px;
 }
 ::ng-deep .mat-select-panel-wrap {
   position: absolute;
@@ -89,6 +89,8 @@
 
 table {
   width: 100%;
+  justify-content: center;
+ text-align: center;
 }
 
 .m-t-xl {
@@ -114,13 +116,42 @@ table {
   }
 }
 
-hr {
-  margin-top: 50px;
-  margin-bottom: 25px;
-}
+// hr {
+//   margin-top: 50px;
+//   margin-bottom: 25px;
+// }
 
 .table_container{
   display: flex;
   flex-direction: column;
- 
+ width: 100%;
+ justify-content: center;
+ text-align: center;
 }
+
+::ng-deep  .templates-text[_ngcontent-iid-c156]{
+padding-right: 20px;
+}
+
+.arrayOfSheet{
+  border: solid 1px #bcb7b7;
+  border-radius: 20px;
+  padding: 4px 36px;
+}
+.arrayOfSheet_div{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+}
+// ----------------------------------------------------------------------------------
+
+.selected
+{
+  border:1px solid red ; 
+}
+
+// ::ng-deep  .selected[_ngcontent-cci-c156] {
+//   border: 1px solid red;
+// }
