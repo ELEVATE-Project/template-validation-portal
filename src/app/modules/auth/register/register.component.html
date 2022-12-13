@@ -10,14 +10,6 @@
         </span></mat-toolbar>
 
       <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Full Name</mat-label>
-        <input matInput formControlName="name" name="name">
-        <mat-error *ngIf="!registerForm.controls['name'].valid">
-          Enter Full Name
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="my-form-field">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" name="email">
         <mat-error *ngIf="!registerForm.controls['email'].valid">
@@ -38,7 +30,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="my-form-field">
+      <!-- <mat-form-field appearance="outline" class="my-form-field">
         <mat-label>Confirm Password</mat-label>
         <input matInput formControlName="confirmPassword" name="confirmPassword" type="password" [type]=" hideconformpassword ?'text' : 'password'" required>
         <button mat-icon-button matSuffix (click)="hideconformpassword = !hideconformpassword" >
@@ -48,7 +40,7 @@
         </button>
         <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">Passwords do not match.</mat-error>
         
-      </mat-form-field>
+      </mat-form-field> -->
 
 
       <div class="div_register_button">

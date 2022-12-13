@@ -91,13 +91,11 @@ table {
   width: 100%;
   justify-content: center;
  text-align: center;
+
 }
 
 .m-t-xl {
   margin-top: 40px;
-}
-
-.m-b-xl {
   margin-bottom: 40px;
 }
 
@@ -108,9 +106,8 @@ table {
 .normal-table {
   th {
     text-align: right;
-    padding: 8px;
+    padding: 8px;   
   }
-
   td {
     padding: 8px;
   }
@@ -145,11 +142,19 @@ padding-right: 20px;
   justify-content: center;
   text-align: center;
 }
+
+.mat-cell , .mat-header-cell{
+  font-size: 14px;
+  min-height: 48px;
+  text-align: center;
+  border-right: 1px solid #bcb7b7;
+}
 // ----------------------------------------------------------------------------------
 
 .selected
 {
   border:1px solid red ; 
+  color:red
 }
 
 // ::ng-deep  .selected[_ngcontent-cci-c156] {
