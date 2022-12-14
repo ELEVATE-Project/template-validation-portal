@@ -53,6 +53,7 @@
   display: grid;
   grid-template-rows: auto auto;
   grid-gap: 20px;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
@@ -63,6 +64,9 @@
 .upload-button{
   background-color: #8b0000;
   color: white;
+  width: 300px;
+}
+.template-fileName{
   width: 300px;
 }
 .download-button{
