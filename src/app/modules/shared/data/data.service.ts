@@ -15,7 +15,9 @@ export class DataService {
 
   post(requestParam: any): Observable<any> {
   
-    return this.http.post(this.baseUrl + requestParam.url, requestParam.data).pipe(
+    return this.http.post(this.baseUrl + requestParam.url, requestParam.data,{
+      headers:requestParam?.headers
+    }).pipe(
       mergeMap((data: any) => {
         if (data?.status !== 200) {
           return observableThrowError(data?.error);

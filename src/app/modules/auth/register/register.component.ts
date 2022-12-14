@@ -8,6 +8,8 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +21,6 @@ export class RegisterComponent implements OnInit {
   hideconformpassword: boolean = false;
   form: FormGroup = new FormGroup({});
   public registerForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
@@ -28,32 +29,30 @@ export class RegisterComponent implements OnInit {
         Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$'),
       ],
     ],
-    confirmPassword: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$'),
-      ],
-    ],
   });
 
-  constructor(private fb: FormBuilder,private router:Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService, private toastr: ToastrService) { }
 
-  ngOnInit() {}
-
+  ngOnInit() { }
+  onClickAlreadyAccountLogin(){
+    this.router.navigate(['/auth/login'])
+  }
   onRegister() {
     if (!this.registerForm.valid) {
       return;
     }
-    if (
-      this.registerForm.value.password ===
-      this.registerForm.value.confirmPassword
-    ) {
-      console.log(this.registerForm.value);
-    } else {
-      alert('Passwords do not match');
-    }
-    this.router.navigate(['/auth/login'])
+
+    this.authService.signup(this.registerForm.value)
+      .subscribe((resp: any) => {
+        if (resp?.status === 200) {
+          this.toastr.success(resp?.response, 'Success')
+          this.router.navigate(['/auth/login'])
+        }
+      }, (error: any) => {
+        this.toastr.error(error, 'Error')
+      })
+
+
   }
 }
 

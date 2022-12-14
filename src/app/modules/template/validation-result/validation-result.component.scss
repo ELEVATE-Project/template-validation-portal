@@ -1,7 +1,19 @@
 .shiksha-logo {
-  width: 20%;
-  height: 10%;
-}
+  height: 70px;
+  padding-left: 30px;
+ }
+ .header-container{
+   height: 10%;
+   display: grid;
+   grid-template-columns: 80% 20%;
+  
+ }
+ .log-out{
+   padding-top: 20px;
+   text-align: center;
+   align-items: center;
+  
+ }
 .download-horizontal {
   height: 30px;
 }
@@ -42,8 +54,6 @@
   flex-direction: column;
   padding: 2%;
   width: 93%;
-  // gap: 83px;
-  // overflow-x: hidden
 }
 
 .templates-text {
@@ -91,13 +101,11 @@ table {
   width: 100%;
   justify-content: center;
  text-align: center;
+
 }
 
 .m-t-xl {
   margin-top: 40px;
-}
-
-.m-b-xl {
   margin-bottom: 40px;
 }
 
@@ -108,18 +116,12 @@ table {
 .normal-table {
   th {
     text-align: right;
-    padding: 8px;
+    padding: 8px;   
   }
-
   td {
     padding: 8px;
   }
 }
-
-// hr {
-//   margin-top: 50px;
-//   margin-bottom: 25px;
-// }
 
 .table_container{
   display: flex;
@@ -145,13 +147,17 @@ padding-right: 20px;
   justify-content: center;
   text-align: center;
 }
+
+.mat-cell , .mat-header-cell{
+  font-size: 14px;
+  min-height: 48px;
+  text-align: center;
+  border-right: 1px solid #bcb7b7;
+}
 // ----------------------------------------------------------------------------------
 
 .selected
 {
   border:1px solid red ; 
+  color:red
 }
-
-// ::ng-deep  .selected[_ngcontent-cci-c156] {
-//   border: 1px solid red;
-// }

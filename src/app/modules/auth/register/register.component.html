@@ -10,25 +10,18 @@
         </span></mat-toolbar>
 
       <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Full Name</mat-label>
-        <input matInput formControlName="name" name="name">
-        <mat-error *ngIf="!registerForm.controls['name'].valid">
-          Enter Full Name
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="my-form-field">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" name="email">
         <mat-error *ngIf="!registerForm.controls['email'].valid">
-          Enter Valid Email 
+          Enter Valid Email
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="my-form-field">
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" name="password" type="password" [type]=" hidepassword ?'text' : 'password'" required  placeholder="Enter valid password">
-        <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword" >
+        <input matInput formControlName="password" name="password" type="password"
+          [type]=" hidepassword ?'text' : 'password'" required placeholder="Enter valid password">
+        <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword">
           <mat-icon>
             {{hidepassword ? 'visibility_off' : 'visibility'}}
           </mat-icon>
@@ -37,20 +30,10 @@
           Enter Valid Password
         </mat-error>
       </mat-form-field>
-
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput formControlName="confirmPassword" name="confirmPassword" type="password" [type]=" hideconformpassword ?'text' : 'password'" required>
-        <button mat-icon-button matSuffix (click)="hideconformpassword = !hideconformpassword" >
-          <mat-icon>
-            {{hideconformpassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">Passwords do not match.</mat-error>
-        
-      </mat-form-field>
-
-
+      
+      <div class="already-account-login" (click)="onClickAlreadyAccountLogin()">
+        Already have an account? login
+      </div>
       <div class="div_register_button">
         <button mat-raised-button type="submit" class="register_button">Sign Up</button>
       </div>
@@ -60,4 +43,3 @@
 
   </mat-card>
 </div>
-
