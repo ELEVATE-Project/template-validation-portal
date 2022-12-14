@@ -1,7 +1,19 @@
 .shiksha-logo {
-  width: 20%;
-  height: 10%;
-}
+  height: 70px;
+  padding-left: 30px;
+ }
+ .header-container{
+   height: 10%;
+   display: grid;
+   grid-template-columns: 80% 20%;
+
+ }
+ .log-out{
+   padding-top: 20px;
+   text-align: center;
+   align-items: center;
+
+ }
 .download-horizontal {
   height: 30px;
 }
@@ -42,8 +54,6 @@
   flex-direction: column;
   padding: 2%;
   width: 93%;
-  // gap: 83px;
-  // overflow-x: hidden
 }
 
 .templates-text {
@@ -112,11 +122,6 @@ table {
     padding: 8px;
   }
 }
-
-// hr {
-//   margin-top: 50px;
-//   margin-bottom: 25px;
-// }
 
 .table_container{
   display: flex;

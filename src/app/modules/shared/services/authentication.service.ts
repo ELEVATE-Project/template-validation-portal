@@ -38,13 +38,16 @@ export class AuthenticationService {
     }
     return this.dataService.post(reqParam);
   }
+  
   isUserLoggedIn(): boolean {
     if (localStorage.getItem('token')) {
       return true
     }
     return false;
   }
-
+logoutAccount() {
+  localStorage.clear();
+  }
 
 
 }

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplateService } from '../../shared/services/template.service';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 type AOA = any[][];
 @Component({
@@ -29,7 +30,7 @@ export class ValidationResultComponent implements OnInit {
   basicErrorsList:Array<Object> = [];
   a: any;
   fileName: string = 'SheetJS.xlsx';
-  errors:any
+  errors: any
   selectedSheet: any;
   headers:any;
   columnIdentifier:any;
@@ -37,9 +38,9 @@ export class ValidationResultComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private templateService: TemplateService) { }
 
 
+  constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
 
   /**
    * Set the paginator after the view init since this component will
@@ -47,16 +48,21 @@ export class ValidationResultComponent implements OnInit {
    */
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
-      this.errors=JSON.parse(params.result)
+      this.errors = JSON.parse(params.result)
     })
     console.log(this.errors);
     this.onFileChange(this.templateService.templateFile)
+    this.isUserLogin = this.authService.isUserLoggedIn();
   }
 
   capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
-
+  onLogout() {
+    this.authService.logoutAccount();
+    this.isUserLogin = false;
+    this.router.navigate(['/auth/login'])
+  }
   onFileChange(evt: any) {
     // const target: DataTransfer = <DataTransfer>evt.target;
     const target: DataTransfer = <DataTransfer>evt;
@@ -145,9 +151,6 @@ export class ValidationResultComponent implements OnInit {
   }
 
   export(): void {
-    // const onlyNameAndSymbolArr: Partial<any>[] = this.wbfile;
-    // TableUtil.exportArrayToExcel(onlyNameAndSymbolArr, this.fileName);
-
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }
 

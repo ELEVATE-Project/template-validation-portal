@@ -34,7 +34,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService, private toastr: ToastrService) { }
 
   ngOnInit() { }
-
+  onClickAlreadyAccountLogin(){
+    this.router.navigate(['/auth/login'])
+  }
   onRegister() {
     if (!this.registerForm.valid) {
       return;
