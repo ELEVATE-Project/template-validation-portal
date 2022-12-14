@@ -1,7 +1,12 @@
 <div class="container">
     <div class="header-container">
         <div class="header-image-container"> <img class="shiksha-logo"
-                src="../../../../assets/Images/shikshalokam-logo.png" alt=""></div>
+                src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+        </div>
+        <div class="log-out" *ngIf="isUserLogin" (click)="onLogout()">
+            <button mat-raised-button>Logout</button>
+        </div>
+
     </div>
     <div class="template-selection-container">
 

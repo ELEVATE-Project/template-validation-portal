@@ -1,7 +1,12 @@
-
 <div>
-    <div class="shiksha-logo_div"> 
-        <img class="shiksha-logo" src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+    <div class="header-container">
+        <div class="header-image-container"> <img class="shiksha-logo"
+                src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+        </div>
+        <div class="log-out" *ngIf="isUserLogin" (click)="onLogout()">
+            <button mat-raised-button>Logout</button>
+        </div>
+
     </div>
     <div class="download-horizontal">
         <hr />
@@ -16,18 +21,6 @@
 
         <div class="flex-container">
             <div class="download_div">
-                <!-- <div>
-                    <input type="file" (change)="onFileChange($event)" multiple="false" />
-                </div> -->
-
-                <!-- <button mat-raised-button class="select-button">
-                        <mat-select placeholder="Select Template" class="select_dropdown">
-                            <mat-option *ngFor="let downloadResource of downloadResources" [value]="downloadResource"
-                                class="select-opt">
-                                {{ downloadResource.name }}
-                            </mat-option>
-                        </mat-select>
-                    </button> -->
                 <div class="export_div">
                     <button (click)="export()" mat-raised-button class="export-button"> Export CSV </button>
 
@@ -38,30 +31,25 @@
 
             </div>
 
-            <!-- <div class="export_report_div">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
-            </div>
-            -->
             <div class="table_container">
                 <div class="arrayOfSheet_div">
-                    <div *ngFor="let s of sheetarr" >
-                        <button class="arrayOfSheet"  *ngIf="s !== 'Instructions'"  (click)="onClickSheetName(s)" >{{s}}</button>
+                    <div *ngFor="let s of sheetarr">
+                        <button class="arrayOfSheet" *ngIf="s !== 'Instructions'"
+                            (click)="onClickSheetName(s)">{{s}}</button>
                     </div>
                 </div>
-               
-
 
                 <table id="table" *ngIf="data" mat-table [dataSource]="data" class="mat-elevation-z8">
                     <ng-container *ngFor="let columnName of columnNames; let j=index" [matColumnDef]="columnName">
                         <div>
-                            <th mat-header-cell *matHeaderCellDef >{{ capitalize(columnName) }}</th>
-                            
+                            <th mat-header-cell *matHeaderCellDef>{{ capitalize(columnName) }}</th>
+
                             <td mat-cell *matCellDef="let row;let i=index;"
-                                [ngClass]="{'selected':isSelected(columnName,row[columnName],row)}">{{ row[columnName] }}</td>
-                               
+                                [ngClass]="{'selected':isSelected(columnName,row[columnName],row)}">{{ row[columnName]
+                                }}</td>
+
                         </div>
-                       
+
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
                     <tr mat-row *matRowDef="let row; columns: columnNames"></tr>
@@ -72,10 +60,6 @@
             </div>
 
         </div>
-
-
-
-
     </div>
     <div>
 

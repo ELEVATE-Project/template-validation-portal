@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplateService } from '../../shared/services/template.service';
 import { Router , NavigationExtras} from '@angular/router';
+import { AuthenticationService } from '../../shared/services/authentication.service';
+
 @Component({
   selector: 'app-template-selection',
   templateUrl: './template-selection.component.html',
@@ -17,12 +19,12 @@ export class TemplateSelectionComponent implements OnInit {
 
   ];
   uploadTemplates: any = [];
-
+  isUserLogin:any = false;
   public sortableElement: string = 'Uploads';
-  constructor(private templateService: TemplateService,private router: Router) { }
+  constructor(private templateService: TemplateService,private router: Router, private authService:AuthenticationService) { }
 
   ngOnInit(): void {
-
+    history.pushState(null, '')
     this.templateService.selectTemplates()
       .subscribe((resp: any) => {
         resp.result.templateLinks.forEach((data: any) => {
@@ -32,7 +34,8 @@ export class TemplateSelectionComponent implements OnInit {
           this.downloadTemplates.push(template)
         });
       }, (error: any) => {
-      })
+      }) 
+      this.isUserLogin = this.authService.isUserLoggedIn();  
   }
   onCickSelectedTemplate(selectedTemplate: any) {
     this.selectedFile = selectedTemplate;
@@ -40,7 +43,7 @@ export class TemplateSelectionComponent implements OnInit {
   setSortableElement($event: string) {
     this.sortableElement = $event;
   }
-
+ 
   templateDownload() {
     const url = this.selectedFile.templateLink;
     let capturedId = url.match(/\/d\/(.+)\//);
@@ -70,7 +73,10 @@ export class TemplateSelectionComponent implements OnInit {
     fileInput.click();
     this.userUploadedFileType = userUploadedFile
   }
-
+  onLogout(){
+    this.authService.logoutAccount();
+    this.router.navigate(['/auth/login'])
+  }
   getFileDetails(event: any) {
     for (var i = 0; i < event.target.files.length; i++) {
       this.fileName = event.target.files[i].name;

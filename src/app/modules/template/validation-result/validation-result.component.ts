@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplateService } from '../../shared/services/template.service';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 type AOA = any[][];
 @Component({
@@ -27,16 +28,14 @@ export class ValidationResultComponent implements OnInit {
   wbfile: any;
   a: any;
   fileName: string = 'SheetJS.xlsx';
-  errors:any
+  errors: any
   selectedSheet: any;
-  headers:any;
-  dummyData:any = [{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"2"},{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"3"}] 
- 
+  headers: any;
+  dummyData: any = [{ "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "2" }, { "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "3" }]
+  isUserLogin: any = false;
 
 
-  constructor(private route: ActivatedRoute, private templateService: TemplateService) { }
-
-
+  constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
 
   /**
    * Set the paginator after the view init since this component will
@@ -44,15 +43,20 @@ export class ValidationResultComponent implements OnInit {
    */
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
-      this.errors=JSON.parse(params.result)
+      this.errors = JSON.parse(params.result)
     })
     this.onFileChange(this.templateService.templateFile)
+    this.isUserLogin = this.authService.isUserLoggedIn();
   }
 
   capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
-
+  onLogout() {
+    this.authService.logoutAccount();
+    this.isUserLogin = false;
+    this.router.navigate(['/auth/login'])
+  }
   onFileChange(evt: any) {
     // const target: DataTransfer = <DataTransfer>evt.target;
     const target: DataTransfer = <DataTransfer>evt;
@@ -62,126 +66,23 @@ export class ValidationResultComponent implements OnInit {
   }
 
 
-  isSelected(column: any, ele: any, row:any) {
-// console.log(column)
-// console.log(ele)
-// console.log(row)
-this.dummyData.forEach((data:any) => {
-  // console.log(data)
-  if(data.columnName == column ){
-  
-    if(ele ==data.data ){
-      
-      // console.log(data.rowNumber)
-      // console.log(row.__rowNum__)
-      if( row.__rowNum__ == (data.rowNumber)){
-        console.log("yes")
-        return true;
+  isSelected(column: any, ele: any, row: any) {
+    this.dummyData.forEach((data: any) => {
+      if (data.columnName == column) {
+
+        if (ele == data.data) {
+          if (row.__rowNum__ == (data.rowNumber)) {
+            console.log("yes")
+            return true;
+          }
+        }
+
+
       }
-    }
-   
-    
-  }
 
 
-return false
-});
-    // let index = column * this.length + row ;
-    //  return this.selection.indexOf(index) >= 0;
-
-// console.log(this.errors.advancedErrors.data)
-// console.log(this.errors.basicErrors.data)
-
-
-// this.errors.advancedErrors.data.forEach((error:any) => {
-//   console.log(error)
-//   if(error.sheetName == this.selectedSheet){
-//     this.a = this.data?.data[1]
-//   }
-// }); 
-    // if (ele == this.a && column == error.column) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-
-    // console.log(this.errorsDummy.result.advancedErrors.data)
-    // console.log(this.errorsDummy.result.basicErrors.data)
-   
-//     this.errorsDummy.result.advancedErrors.data.forEach((error:any) => {
-//   if(error.sheetName == this.selectedSheet){
-//         for(let key in  this.headers) {
-          
-//           if(error.columnName == this.headers[key]){
-//             if(column == key){
-    
-//              if(error.rowNumber.length > 1){
-//               console.log(error.rowNumber)
-//               error.rowNumber.forEach((rowNum:any) => {
-//                 if((rowNum) == row.__rowNum__){
-//                   console.log(row.__rowNum__)
-//                   console.log("true...........")
-//                   return true;
-//                 }
-//                 return false
-//               });
-             
-//              }else{
-//               if((error.rowNumber) == row.__rowNum__){
-//                 console.log("true...........")
-//                 return true;
-//               }
-            
-//              }
-             
-              
-//             }
-//           }
-          
-//           }
-
-//           return false;
-      
-//    }else{
-//     return false;
-//    }
-// }); 
-// this.errorsDummy.result.basicErrors.data.forEach((error:any) => {
-//   if(error.sheetName == this.selectedSheet){
-//         for(let key in  this.headers) {
-//           if(error.columnName == this.headers[key]){
-//             if(column == key){
-//              if(error.rowNumber.length > 1){
-//               error.rowNumber.forEach((rowNum:any) => {
-//                 if((rowNum+2) == row.__rowNum__){
-//                   console.log("true...........")
-//                   return true;
-//                 }
-//                 return false
-//               });
-             
-//              }else{
-//               if((error.rowNumber+2) == row.__rowNum__){
-//                 console.log("true...........")
-//                 return true;
-//               }
-            
-//              }
-             
-              
-//             }
-//           }
-          
-//           }
-
-//           return false;
-      
-//    }else{
-//     return false;
-//    }
-// }); 
-
-   
+      return false
+    });
 
   }
 
@@ -193,7 +94,7 @@ return false
       const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
       this.wbfile = wb;
       this.sheetarr = wb.SheetNames;
-      /* grab first sheet */  
+      /* grab first sheet */
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       /* save data */
@@ -221,9 +122,6 @@ return false
   }
 
   export(): void {
-    // const onlyNameAndSymbolArr: Partial<any>[] = this.wbfile;
-    // TableUtil.exportArrayToExcel(onlyNameAndSymbolArr, this.fileName);
-
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }
 
