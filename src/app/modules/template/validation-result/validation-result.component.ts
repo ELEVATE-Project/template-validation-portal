@@ -32,12 +32,10 @@ export class ValidationResultComponent implements OnInit {
   fileName: string = 'SheetJS.xlsx';
   errors: any
   selectedSheet: any;
-  headers:any;
+  headers: any;
+  dummyData: any = [{ "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "2" }, { "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "3" }]
+  isUserLogin: any = false;
   columnIdentifier:any;
-  dummyData:any = [{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"2"},{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"3"}]
-
-
-
 
 
   constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }

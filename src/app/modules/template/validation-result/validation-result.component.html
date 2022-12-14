@@ -1,17 +1,6 @@
 <div>
-<<<<<<< HEAD
     <div class="shiksha-logo_div">
         <img class="shiksha-logo" src="../../../../assets/Images/shikshalokam-logo.png" alt="">
-=======
-    <div class="header-container">
-        <div class="header-image-container"> <img class="shiksha-logo"
-                src="../../../../assets/Images/shikshalokam-logo.png" alt="">
-        </div>
-        <div class="log-out" *ngIf="isUserLogin" (click)="onLogout()">
-            <button mat-raised-button>Logout</button>
-        </div>
-
->>>>>>> shikshalokam/validation_result
     </div>
     <div class="download-horizontal">
         <hr />
@@ -60,8 +49,8 @@
                                 [ngClass]="{'selected':isAdvancedError(columnName,row[columnName],row,i),'basic-error':isBasicError(columnName,row[columnName],row,i)}">{{ row[columnName] }}
                                 <ng-template #tooltipTemplate>
                                     <div>
-                                        <p>{{getErrorsList(columnName,i)}}</p>
-                                        <p *ngFor="let error of getBasicErrors(columnName,i)">{{error}}</p>
+                                        <p class="m-4" *ngIf="getErrorsList(columnName,i)">{{getErrorsList(columnName,i)}}</p>
+                                        <p class="m-4" *ngFor="let error of getBasicErrors(columnName,i)">{{error}}</p>
                                     </div>
                                 </ng-template>
                             </td>
