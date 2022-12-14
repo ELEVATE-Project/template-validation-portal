@@ -26,6 +26,8 @@ export class ValidationResultComponent implements OnInit {
   sheetarr: any;
   wsname: any;
   wbfile: any;
+  errorIndex:number = -1;
+  basicErrorsList:Array<Object> = [];
   a: any;
   fileName: string = 'SheetJS.xlsx';
   errors: any
@@ -33,6 +35,7 @@ export class ValidationResultComponent implements OnInit {
   headers: any;
   dummyData: any = [{ "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "2" }, { "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "3" }]
   isUserLogin: any = false;
+  columnIdentifier:any;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
@@ -45,6 +48,7 @@ export class ValidationResultComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.errors = JSON.parse(params.result)
     })
+    console.log(this.errors);
     this.onFileChange(this.templateService.templateFile)
     this.isUserLogin = this.authService.isUserLoggedIn();
   }
@@ -66,24 +70,39 @@ export class ValidationResultComponent implements OnInit {
   }
 
 
-  isSelected(column: any, ele: any, row: any) {
-    this.dummyData.forEach((data: any) => {
-      if (data.columnName == column) {
+  isBasicError(column: any, ele: any, row:any,index:number) {
+    if(this.basicErrorsList.length) {
+      return (this.basicErrorsList.find((element:any) => element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) ? true : false)
+    }
+    else {
+      return false;
+    }
+  }
 
-        if (ele == data.data) {
-          if (row.__rowNum__ == (data.rowNumber)) {
-            console.log("yes")
-            return true;
-          }
+  getErrorsList(column: any,index:number) {
+
+    if(this.errorIndex >= 0 && this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column]) {
+      return this.errors.advancedErrors.data[this.errorIndex].errMessage
+    }
+
+  }
+
+  getBasicErrors(column: any,index:number) {
+    let item
+    if(this.basicErrorsList.length) {
+      item = this.basicErrorsList.map((element:any) => {
+        if(element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) {
+          return element.errMessage;
         }
-
-
-      }
-
-
-      return false
-    });
-
+      }).filter((element) => element)
+    }
+    return item
+  }
+  isAdvancedError(column: any, ele: any, row:any,index:number) {
+    // console.log(index,this.paginator.page,this.paginator.pageIndex,this.paginator.pageSize,this.paginator.pageSizeOptions)
+    if(this.errorIndex >= 0) {
+      return this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column];
+    }
   }
 
 
@@ -113,12 +132,20 @@ export class ValidationResultComponent implements OnInit {
     const ws: XLSX.WorkSheet = this.wbfile.Sheets[wsname];
     const data: any = XLSX.utils.sheet_to_json(ws);
     this.headers = data[0]
+    this.columnIdentifier = data[0]
+    console.log(this.columnIdentifier);
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
     this.data.paginator = this.paginator;
     // if (s == "Sheet1")
     //   this.a = this.data.data[2].Name
     this.selectedSheet = s;
+
+   this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)
+   this.basicErrorsList = this.errors.basicErrors.data.filter((item:any) => item.sheetName == this.selectedSheet);
+   console.log(this.basicErrorsList);
+
+    // console.log(this.errorIndex);
   }
 
   export(): void {
