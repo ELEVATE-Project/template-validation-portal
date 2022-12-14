@@ -3,3 +3,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.custom-tooltip {
+    background-color: #232F34;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+}

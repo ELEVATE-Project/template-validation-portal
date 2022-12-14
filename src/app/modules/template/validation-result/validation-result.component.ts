@@ -25,13 +25,16 @@ export class ValidationResultComponent implements OnInit {
   sheetarr: any;
   wsname: any;
   wbfile: any;
+  errorIndex:number = -1;
+  basicErrorsList:Array<Object> = [];
   a: any;
   fileName: string = 'SheetJS.xlsx';
   errors:any
   selectedSheet: any;
   headers:any;
-  dummyData:any = [{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"2"},{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"3"}] 
- 
+  columnIdentifier:any;
+  dummyData:any = [{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"2"},{"columnName":"Enter the role here. (The roles should already be given on platform)","data":"Program Manager","rowNumber":"3"}]
+
 
 
   constructor(private route: ActivatedRoute, private templateService: TemplateService) { }
@@ -46,6 +49,7 @@ export class ValidationResultComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.errors=JSON.parse(params.result)
     })
+    console.log(this.errors);
     this.onFileChange(this.templateService.templateFile)
   }
 
@@ -62,127 +66,39 @@ export class ValidationResultComponent implements OnInit {
   }
 
 
-  isSelected(column: any, ele: any, row:any) {
-// console.log(column)
-// console.log(ele)
-// console.log(row)
-this.dummyData.forEach((data:any) => {
-  // console.log(data)
-  if(data.columnName == column ){
-  
-    if(ele ==data.data ){
-      
-      // console.log(data.rowNumber)
-      // console.log(row.__rowNum__)
-      if( row.__rowNum__ == (data.rowNumber)){
-        console.log("yes")
-        return true;
-      }
+  isBasicError(column: any, ele: any, row:any,index:number) {
+    if(this.basicErrorsList.length) {
+      return (this.basicErrorsList.find((element:any) => element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) ? true : false)
     }
-   
-    
+    else {
+      return false;
+    }
   }
 
+  getErrorsList(column: any,index:number) {
 
-return false
-});
-    // let index = column * this.length + row ;
-    //  return this.selection.indexOf(index) >= 0;
+    if(this.errorIndex >= 0 && this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column]) {
+      return this.errors.advancedErrors.data[this.errorIndex].errMessage
+    }
 
-// console.log(this.errors.advancedErrors.data)
-// console.log(this.errors.basicErrors.data)
+  }
 
-
-// this.errors.advancedErrors.data.forEach((error:any) => {
-//   console.log(error)
-//   if(error.sheetName == this.selectedSheet){
-//     this.a = this.data?.data[1]
-//   }
-// }); 
-    // if (ele == this.a && column == error.column) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-
-    // console.log(this.errorsDummy.result.advancedErrors.data)
-    // console.log(this.errorsDummy.result.basicErrors.data)
-   
-//     this.errorsDummy.result.advancedErrors.data.forEach((error:any) => {
-//   if(error.sheetName == this.selectedSheet){
-//         for(let key in  this.headers) {
-          
-//           if(error.columnName == this.headers[key]){
-//             if(column == key){
-    
-//              if(error.rowNumber.length > 1){
-//               console.log(error.rowNumber)
-//               error.rowNumber.forEach((rowNum:any) => {
-//                 if((rowNum) == row.__rowNum__){
-//                   console.log(row.__rowNum__)
-//                   console.log("true...........")
-//                   return true;
-//                 }
-//                 return false
-//               });
-             
-//              }else{
-//               if((error.rowNumber) == row.__rowNum__){
-//                 console.log("true...........")
-//                 return true;
-//               }
-            
-//              }
-             
-              
-//             }
-//           }
-          
-//           }
-
-//           return false;
-      
-//    }else{
-//     return false;
-//    }
-// }); 
-// this.errorsDummy.result.basicErrors.data.forEach((error:any) => {
-//   if(error.sheetName == this.selectedSheet){
-//         for(let key in  this.headers) {
-//           if(error.columnName == this.headers[key]){
-//             if(column == key){
-//              if(error.rowNumber.length > 1){
-//               error.rowNumber.forEach((rowNum:any) => {
-//                 if((rowNum+2) == row.__rowNum__){
-//                   console.log("true...........")
-//                   return true;
-//                 }
-//                 return false
-//               });
-             
-//              }else{
-//               if((error.rowNumber+2) == row.__rowNum__){
-//                 console.log("true...........")
-//                 return true;
-//               }
-            
-//              }
-             
-              
-//             }
-//           }
-          
-//           }
-
-//           return false;
-      
-//    }else{
-//     return false;
-//    }
-// }); 
-
-   
-
+  getBasicErrors(column: any,index:number) {
+    let item
+    if(this.basicErrorsList.length) {
+      item = this.basicErrorsList.map((element:any) => {
+        if(element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) {
+          return element.errMessage;
+        }
+      }).filter((element) => element)
+    }
+    return item
+  }
+  isAdvancedError(column: any, ele: any, row:any,index:number) {
+    // console.log(index,this.paginator.page,this.paginator.pageIndex,this.paginator.pageSize,this.paginator.pageSizeOptions)
+    if(this.errorIndex >= 0) {
+      return this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column];
+    }
   }
 
 
@@ -193,7 +109,7 @@ return false
       const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
       this.wbfile = wb;
       this.sheetarr = wb.SheetNames;
-      /* grab first sheet */  
+      /* grab first sheet */
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       /* save data */
@@ -212,12 +128,20 @@ return false
     const ws: XLSX.WorkSheet = this.wbfile.Sheets[wsname];
     const data: any = XLSX.utils.sheet_to_json(ws);
     this.headers = data[0]
+    this.columnIdentifier = data[0]
+    console.log(this.columnIdentifier);
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
     this.data.paginator = this.paginator;
     // if (s == "Sheet1")
     //   this.a = this.data.data[2].Name
     this.selectedSheet = s;
+
+   this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)
+   this.basicErrorsList = this.errors.basicErrors.data.filter((item:any) => item.sheetName == this.selectedSheet);
+   console.log(this.basicErrorsList);
+
+    // console.log(this.errorIndex);
   }
 
   export(): void {
