@@ -1,158 +1,96 @@
-// .shiksha-logo {
-//  height: 60px;
-// }
-// .header-container{
-//   height: 10%;
-//   box-shadow: 0px 2px;
-// }
-// .template-selection-container{
-//   background-color: #d8d8d8;
-//   display:flex;
-//   flex-direction: column;
- 
-// }
-
-
-
-// .container{
-//   display: flex;
-//   flex-direction: column;
-// }
-// .card-conatiner{
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-// .tempplate-download, .tempplate-upload{
-//   width: 16%;
-//   border-radius: 20px;
-//   background-color: #8b0000;
-//   color: white;
-
-// }
-// .tempplate-card{
-//   display: flex;
-//   flex-direction: column;
-// }
-
-
-.download-horizontal {
-  height: 30px;
+.shiksha-logo {
+ height: 70px;
+ padding-left: 30px;
 }
-
-.template-sections {
-  padding-top: 12px;
+.header-container{
+  height: 10%;
+  box-shadow: 3px 3px 3px 3px rgb(224, 223, 223);
 }
-
-.tempplate-download {
-  width: 16%;
-  // height: 40px;
-  padding-left: 40px;
-  border-radius: 20px;
-  background-color: #8b0000;
-  color: white;
-  position: absolute;
-  clip: rect(11px, 287px, 200px, 0px);
-  margin-top: -40px;
+.template-selection-container{
+  height: 88vh;
+  display:grid;
+  grid-template-columns: 50% 50%;
+  margin: 5px;
 }
-
-.download-section {
-  margin-top: 1%;
+.tempplate-download-card{
+   background-color: #f7f7f7;
+   margin: 100px;
+   
+   
 }
-
-.flex-container {
+.tempplate-upload-card{
+  background-color: #f7f7f7;
+  margin: 100px;
+  
+}
+.container{
   display: flex;
+  flex-direction: column;
+}
+.card-conatiner-upload{
+  padding-top: 20px;
+  display: grid;
+  height: 30vh;
+  grid-template-rows: 50% 30%;
+  grid-gap: 20px;
+
+}
+.card-conatiner-download{
+  padding-top: 20px;
+  display: grid;
+  height: 30vh;
+  grid-template-rows: 60% 30%;
+  grid-gap: 20px;
+}
+.tempplate-download, .tempplate-upload{
+  width: 250px;
+  font-size: large;
+  font-weight: 500;
+  color: #8b0000;
+
+}
+.template-upload-button-container{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-gap: 20px;
+  align-items: center;
   justify-content: center;
-  margin-top: -8px;
 }
-.templates-text {
-  padding-left: 37%;
-  padding-top: 50px;
-  color: grey;
-}
-
-.select-button {
-  border: solid 1px #bcb7b7;
-  border-radius: 20px;
-  padding: 4px 36px;
-}
-.download-button {
-  border-radius: 20px;
-  background-color: #18b528;
-  padding: 0 70px;
-  color: white;
-  margin-top: 9px;
-}
-
-.upload-horizontal {
-  height: 30px;
-}
-
-.upload-hr {
-  margin-top: 10%;
-}
-
-.tempplate-upload {
-  width: 16%;
-   height: 40px;
-  padding-left: 40px;
-  border-radius: 20px;
-  background-color: #8b0000;
-  color: white;
-  position: absolute;
-  clip: rect(10px, 287px, 200px, 0px);
-  margin-top: -40px;
-}
-
-.select-div {
-  padding-top: 17px;
-}
-
-.upload-div {
-  margin-top: 10px;
-}
-
-.select-file {
+.tempplate-card{
   display: flex;
-  justify-content: space-around;
-  width: 50%;
-  height: 55px;
-  margin-left: 25%;
-  border-radius: 20px;
-  border: solid 1px #bcb7b7;
-  margin-top: 5%;
-  box-shadow: rgba(0, 0, 0, 0.15) 3px 6px 3px 0px;
+  flex-wrap: wrap;
 }
-
-.upload-button {
-  border-radius: 20px;
+.upload-button{
   background-color: #8b0000;
-  padding: 0 35px;
   color: white;
+  width: 300px;
+}
+.download-button{
+  background-color: #5db849;
+  color: white;
+  width: 300px;
+}
+.select-div{
+  display: flex;
+  max-width: 80px;
+  align-items: center;
+  justify-content: center;
 }
 
-::ng-deep .mat-select-panel-wrap {
-  position: absolute;
-  top: 46px !important;
+.card-conatiner  p{
+  font-weight: 500;
+  padding-left: 20px;
 }
-
-.select-opt {
-  border-radius: 20px;
-  border: 1px solid grey;
+.template-button{
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+  justify-content: center;
 }
-
-::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
-  box-shadow: 0px 0px 0px 0px;
-  margin-left: -20px;
-}
-
-.uploads {
-  // margin-left: 20px;
-  padding-top: 7px;
+.select-button{
+  width: 300px;
   text-align: center;
 }
-
-
-
+.select-opt{
+  text-align: center;
+}
