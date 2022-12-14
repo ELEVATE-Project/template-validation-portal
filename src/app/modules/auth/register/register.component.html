@@ -30,19 +30,7 @@
           Enter Valid Password
         </mat-error>
       </mat-form-field>
-
-      <!-- <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput formControlName="confirmPassword" name="confirmPassword" type="password" [type]=" hideconformpassword ?'text' : 'password'" required>
-        <button mat-icon-button matSuffix (click)="hideconformpassword = !hideconformpassword" >
-          <mat-icon>
-            {{hideconformpassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="!registerForm.controls['confirmPassword'].valid">Passwords do not match.</mat-error>
-        
-      </mat-form-field> -->
-
+      
       <div class="already-account-login" (click)="onClickAlreadyAccountLogin()">
         Already have an account? login
       </div>
