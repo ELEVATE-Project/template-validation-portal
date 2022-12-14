@@ -10,10 +10,33 @@ export class TemplateSelectionComponent implements OnInit {
   fileInput: any;
   fileName = '';
 
-  public downloadTemplates = [
-    { id: 0, name: 'Select Project Template' },
-    { id: 1, name: 'Select Observation Template' },
-    { id: 2, name: 'Select Survey Template' },
+  response = {
+    status : 200,
+    code : 'OK',
+    result: {
+        templateLinks : [
+            {
+               templateName : "projectTemplate",
+               templateLink : "http://"
+
+            },
+            {
+               templateName : "programTemplate",
+               templateLink : "http://"
+
+            }
+        ]
+    }
+}
+
+
+  // public downloadTemplates = [
+  //   { id: 0, name: 'Select Project Template' },
+  //   { id: 1, name: 'Select Observation Template' },
+  //   { id: 2, name: 'Select Survey Template' },
+  // ];
+  public downloadTemplates:any= [
+    
   ];
 
   public uploadTemplates = ['Excel File', 'Google Share Link'];
@@ -21,7 +44,14 @@ export class TemplateSelectionComponent implements OnInit {
   public sortableElement: string = 'Uploads';
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    for(let i=0;i<this.response.result.templateLinks.length;i++){
+      this.downloadTemplates.push(this.response.result.templateLinks[i].templateName)
+      console.log(this.response.result.templateLinks[i].templateName)
+    }
+    console.log(this.downloadTemplates)
+   
+  }
 
   setSortableElement($event: string) {
     this.sortableElement = $event;
