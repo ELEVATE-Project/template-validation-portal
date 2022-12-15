@@ -29,9 +29,11 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService, private toastr: ToastrService, private dataService:DataService) { }
   
   ngOnInit() {
+    
     if(this.authService.isUserLoggedIn()){
       this.router.navigate(['/template/template-selection'])
     }
+
    }
 
 
