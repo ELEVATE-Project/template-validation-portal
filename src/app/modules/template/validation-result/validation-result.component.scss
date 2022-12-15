@@ -6,13 +6,13 @@
    height: 10%;
    display: grid;
    grid-template-columns: 80% 20%;
-  
+
  }
  .log-out{
    padding-top: 20px;
    text-align: center;
    align-items: center;
-  
+
  }
 .download-horizontal {
   height: 30px;
@@ -116,7 +116,7 @@ table {
 .normal-table {
   th {
     text-align: right;
-    padding: 8px;   
+    padding: 8px;
   }
   td {
     padding: 8px;
@@ -158,6 +158,24 @@ padding-right: 20px;
 
 .selected
 {
-  border:1px solid red ; 
+  border:1px solid red ;
   color:red
 }
+.basic-error {
+  border:1px solid brown ;
+  color:brown;
+}
+
+.m-4 {
+  margin: 16px;
+}
+
+.my-tooltip {
+  white-space: pre-line;
+}
+
+
+
+// ::ng-deep  .selected[_ngcontent-cci-c156] {
+//   border: 1px solid red;
+// }

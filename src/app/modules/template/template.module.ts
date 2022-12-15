@@ -6,6 +6,9 @@ import { TemplateSuccessComponent } from './template-success/template-success.co
 import { MaterialModule } from 'src/app/material.module';
 import { TemplateRoutingModule } from './template.routing.module';
 import { TemplateReportComponent } from './template-report/template-report.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { CustomTooltipDirective } from '../shared/directives/custom-tooltip.directive';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { TemplateReportComponent } from './template-report/template-report.compo
   imports: [
     CommonModule,
     MaterialModule,
-    TemplateRoutingModule
+    TemplateRoutingModule,
+    MatTooltipModule,
+    SharedModule
   ]
 })
 export class TemplateModule { }
