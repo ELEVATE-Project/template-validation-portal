@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, 
     private authService: AuthenticationService, private toastr: ToastrService, private dataService:DataService) { }
   
-  ngOnInit() { }
+  ngOnInit() {
+    if(this.authService.isUserLoggedIn()){
+      this.router.navigate(['/template/template-selection'])
+    }
+   }
 
 
   onLogin() {
