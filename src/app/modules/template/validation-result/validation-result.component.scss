@@ -80,19 +80,19 @@
   padding: 0 83px;
   color: white;
 }
-::ng-deep .mat-select-panel-wrap {
-  position: absolute;
-  top: 46px !important;
-}
+// ::ng-deep .mat-select-panel-wrap {
+//   position: absolute;
+//   top: 46px !important;
+// }
 
 .select-opt {
   border-radius: 20px;
   border: 1px solid grey;
 }
-::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
-  box-shadow: 0px 0px 0px 0px;
-  margin-left: -20px;
-}
+// ::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
+//   box-shadow: 0px 0px 0px 0px;
+//   margin-left: -20px;
+// }
 
 
 // ................................................................................
