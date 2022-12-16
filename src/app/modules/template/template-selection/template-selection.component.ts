@@ -75,7 +75,8 @@ export class TemplateSelectionComponent implements OnInit {
           }
          
 
-        })
+        }, (error: any) => {
+        this.loader = false; })
       });
     }
   }

@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/template/template-selection'])
         }
       }, (error: any) => {
+        this.loader = false;
         this.toastr.error(error,'Error')
       })
 

@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/auth/login'])
         }
       }, (error: any) => {
+        this.loader = false;
         this.toastr.error(error, 'Error')
       })
 
