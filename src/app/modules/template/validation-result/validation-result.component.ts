@@ -33,7 +33,6 @@ export class ValidationResultComponent implements OnInit {
   errors: any
   selectedSheet: any;
   headers: any;
-  dummyData: any = [{ "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "2" }, { "columnName": "Enter the role here. (The roles should already be given on platform)", "data": "Program Manager", "rowNumber": "3" }]
   isUserLogin: any = false;
   columnIdentifier:any;
 
@@ -45,9 +44,8 @@ export class ValidationResultComponent implements OnInit {
    * be able to query its view for the initialized paginator.
    */
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: any) => {
-      this.errors = JSON.parse(params.result)
-    })
+  
+   this.errors = this.templateService.templateError
     console.log(this.errors);
     this.onFileChange(this.templateService.templateFile)
     this.isUserLogin = this.authService.isUserLoggedIn();
@@ -137,8 +135,6 @@ export class ValidationResultComponent implements OnInit {
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
     this.data.paginator = this.paginator;
-    // if (s == "Sheet1")
-    //   this.a = this.data.data[2].Name
     this.selectedSheet = s;
 
    this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)

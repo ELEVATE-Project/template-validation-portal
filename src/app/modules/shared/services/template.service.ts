@@ -6,6 +6,7 @@ import { DataService } from '../data/data.service';
 export class TemplateService {
   [x: string]: any;
   templateFile:any;
+  templateError:any;
   constructor(private dataService: DataService) { }
 
   selectTemplates() {

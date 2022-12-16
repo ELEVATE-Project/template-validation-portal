@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TemplateService } from '../../shared/services/template.service';
 import { Router , NavigationExtras} from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authentication.service';
@@ -13,6 +13,7 @@ export class TemplateSelectionComponent implements OnInit {
   fileInput: any;
   fileName = '';
   wbfile: any;
+  loader:any = false;
   userSelectedFile: any;
   userUploadedFileType: any;
   public downloadTemplates: any = [
@@ -22,9 +23,18 @@ export class TemplateSelectionComponent implements OnInit {
   isUserLogin:any = false;
   public sortableElement: string = 'Uploads';
   constructor(private templateService: TemplateService,private router: Router, private authService:AuthenticationService) { }
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event:any) {
+    window.location.hash = "dontgoback";
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.router.navigate(['/template/template-selection']);
+  }
 
   ngOnInit(): void {
-    history.pushState(null, '')
+  
+    history.pushState(null,'', window.location.href);
     this.templateService.selectTemplates()
       .subscribe((resp: any) => {
         resp.result.templateLinks.forEach((data: any) => {
@@ -43,23 +53,27 @@ export class TemplateSelectionComponent implements OnInit {
   setSortableElement($event: string) {
     this.sortableElement = $event;
   }
- 
+  
   templateDownload() {
     const url = this.selectedFile.templateLink;
     let capturedId = url.match(/\/d\/(.+)\//);
     window.open(`https://docs.google.com/spreadsheets/d/${capturedId[1]}/export?format=xlsx`)
   }
   templateUpload() {
+    this.loader = true
     if (this.userSelectedFile) {
       this.templateService.uploadTemplates(this.userSelectedFile).subscribe((event: any) => {
         this.templateService.validateTemplates(event.result.templatePath, this.userUploadedFileType).subscribe((data) => {
           
-          const navigationExtra:NavigationExtras = {
-            queryParams:{
-              result:JSON.stringify(data.result)
-            }    
+          this.loader = false
+          if(!data.result.advancedErrors && !data.result.basicErrors){
+            this.router.navigate(['/template/template-success'])
+          }else{
+            
+            this.templateService.templateError=data.result;  
+            this.router.navigate(['/template/validation-result'])
           }
-      this.router.navigate(['/template/validation-result'],navigationExtra)
+         
 
         })
       });
@@ -70,6 +84,7 @@ export class TemplateSelectionComponent implements OnInit {
     this.userSelectedFile = event.target.files[0];
   }
   fileUpload(fileInput: HTMLInputElement, userUploadedFile: any) {
+    this.fileName = ""
     fileInput.click();
     this.userUploadedFileType = userUploadedFile
   }

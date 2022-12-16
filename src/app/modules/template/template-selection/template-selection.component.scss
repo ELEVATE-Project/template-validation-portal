@@ -23,13 +23,13 @@
 }
 .tempplate-download-card{
    background-color: #f7f7f7;
-   margin: 100px;
+   margin: 15%;
    
    
 }
 .tempplate-upload-card{
   background-color: #f7f7f7;
-  margin: 100px;
+  margin: 15%
   
 }
 .container{
@@ -40,7 +40,7 @@
   padding-top: 20px;
   display: grid;
   height: 30vh;
-  grid-template-rows: 50% 30%;
+  grid-template-rows: 40% 30% 30%;
   grid-gap: 20px;
 
 }
@@ -48,7 +48,7 @@
   padding-top: 20px;
   display: grid;
   height: 30vh;
-  grid-template-rows: 60% 30%;
+  grid-template-rows: 70% 30%;
   grid-gap: 20px;
 }
 .tempplate-download, .tempplate-upload{
@@ -59,9 +59,6 @@
 
 }
 .template-upload-button-container{
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-gap: 20px;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -76,7 +73,10 @@
   width: 250px;
 }
 .template-fileName{
-  width: 250px;
+  padding-top: 10px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 .download-button{
   background-color: #5db849;
@@ -106,6 +106,18 @@
 }
 .select-opt{
   text-align: center;
+}
+
+.spinner{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  padding-top: 15%;
+  align-items: center;
+  justify-content: center;
+}
+.spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #8b0000;
 }
 
 @media (max-width: 1000px) {
