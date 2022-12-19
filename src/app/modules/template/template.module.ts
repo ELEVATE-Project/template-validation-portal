@@ -10,6 +10,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { CustomTooltipDirective } from '../shared/directives/custom-tooltip.directive';
 import { SharedModule } from '../shared/shared.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TemplateRoutingModule,
     MatTooltipModule,
     SharedModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ]
 })
 export class TemplateModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -35,9 +35,11 @@ export class ValidationResultComponent implements OnInit {
   headers: any;
   isUserLogin: any = false;
   columnIdentifier:any;
-
+  statusClass:any ='not-active';
+state:any = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
+
 
   /**
    * Set the paginator after the view init since this component will
@@ -46,9 +48,9 @@ export class ValidationResultComponent implements OnInit {
   ngOnInit(): void {
   
    this.errors = this.templateService.templateError
-    console.log(this.errors);
     this.onFileChange(this.templateService.templateFile)
     this.isUserLogin = this.authService.isUserLoggedIn();
+
   }
 
   capitalize(s: string): string {
@@ -60,11 +62,15 @@ export class ValidationResultComponent implements OnInit {
     this.router.navigate(['/auth/login'])
   }
   onFileChange(evt: any) {
+    if(!this.errors){
+      this.router.navigate(['/template/template-selection'])
+    }
     // const target: DataTransfer = <DataTransfer>evt.target;
     const target: DataTransfer = <DataTransfer>evt;
     const reader: FileReader = new FileReader();
 
     this.readFile(target, reader).subscribe((output) => { });
+    
   }
 
 
@@ -118,20 +124,31 @@ export class ValidationResultComponent implements OnInit {
       const data: any = XLSX.utils.sheet_to_json(ws);
       sub.next(data);
       sub.complete();
+      this.onClickSheetName(wb.SheetNames[1])
 
     };
 
     reader.readAsBinaryString(target.files[0]);
+    
     return sub.asObservable();
   }
-
+  isSlectedSheet(s: any){
+    if(s==this.selectedSheet){
+      return true;
+    }else{
+      return false
+    }
+  
+   
+  }
   onClickSheetName(s: any) {
+  
     const wsname: string = s;
     const ws: XLSX.WorkSheet = this.wbfile.Sheets[wsname];
     const data: any = XLSX.utils.sheet_to_json(ws);
     this.headers = data[0]
     this.columnIdentifier = data[0]
-    console.log(this.columnIdentifier);
+    
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
     this.data.paginator = this.paginator;
@@ -139,11 +156,19 @@ export class ValidationResultComponent implements OnInit {
 
    this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)
    this.basicErrorsList = this.errors.basicErrors.data.filter((item:any) => item.sheetName == this.selectedSheet);
-   console.log(this.basicErrorsList);
+  
 
     // console.log(this.errorIndex);
   }
+  firstRow(index:any){
+    if(index == 0){
+      console.log(index)
+      return true
+    }else{
+      return false
+    }
 
+  }
   export(): void {
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }

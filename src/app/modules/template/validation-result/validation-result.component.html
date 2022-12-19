@@ -1,27 +1,32 @@
 <div>
-    <div class="shiksha-logo_div">
-        <img class="shiksha-logo" src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+    <div class="header-container">
+        <div class="header-image-container"> <img class="shiksha-logo"
+                src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+        </div>
+        <div class="log-out" *ngIf="isUserLogin" (click)="onLogout()">
+            <button mat-raised-button>Logout</button>
+        </div>
+
     </div>
-    <div class="download-horizontal">
-        <hr />
-    </div>
-    <div class="tempplate-download">
-        <p class="template-sections">Validation Result</p>
+ 
+    <div class="validation-result">
+        <p class="validation-sections">Validation Result</p>
     </div>
     <div>
-        <div class="templates-text">
+        <!-- <div class="templates-text">
             <p> Resource</p>
-        </div>
+        </div> -->
 
         <div class="flex-container">
             <div class="download_div">
                 <div class="export_div">
-                    <button (click)="export()" mat-raised-button class="export-button"> Export CSV </button>
+                    
+                    <button (click)="export()" mat-raised-button class="export-button"> <mat-icon>download</mat-icon> Export CSV </button>
 
                 </div>
-                <div>
+                <!-- <div>
                     <button mat-raised-button class="report-button"> Reports </button>
-                </div>
+                </div> -->
 
             </div>
 
@@ -33,7 +38,7 @@
             <div class="table_container">
                 <div class="arrayOfSheet_div">
                     <div *ngFor="let s of sheetarr">
-                        <button class="arrayOfSheet" *ngIf="s !== 'Instructions'"
+                        <button class="arrayOfSheet"   [ngClass]="{'active':isSlectedSheet(s)}" *ngIf="s !== 'Instructions'"
                             (click)="onClickSheetName(s)">{{s}}</button>
                     </div>
                 </div>
@@ -46,7 +51,7 @@
                             <th mat-header-cell *matHeaderCellDef >{{ capitalize(columnName) }}</th>
 
                             <td mat-cell *matCellDef="let row;let i=index;" [appCustomTooltip]="tooltipTemplate"
-                                [ngClass]="{'selected':isAdvancedError(columnName,row[columnName],row,i),'basic-error':isBasicError(columnName,row[columnName],row,i)}">{{ row[columnName] }}
+                                [ngClass]="{'selected':isAdvancedError(columnName,row[columnName],row,i),'basic-error':isBasicError(columnName,row[columnName],row,i), 'selectedFirstRow':firstRow(i)}">{{ row[columnName] }}
                                 <ng-template #tooltipTemplate>
                                     <div>
                                         <p class="m-4" *ngIf="getErrorsList(columnName,i)">{{getErrorsList(columnName,i)}}</p>
