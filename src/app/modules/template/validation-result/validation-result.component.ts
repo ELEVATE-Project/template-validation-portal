@@ -15,8 +15,6 @@ type AOA = any[][];
 })
 export class ValidationResultComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true })
-  paginator!: MatPaginator;
   highlight: boolean = false;
   data: MatTableDataSource<any> | undefined;
   columnNames: any;
@@ -76,7 +74,7 @@ state:any = true;
 
   isBasicError(column: any, ele: any, row:any,index:number) {
     if(this.basicErrorsList.length) {
-      return (this.basicErrorsList.find((element:any) => element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) ? true : false)
+      return (this.basicErrorsList.find((element:any) => element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) ? true : false)
     }
     else {
       return false;
@@ -85,17 +83,17 @@ state:any = true;
 
   getErrorsList(column: any,index:number) {
 
-    if(this.errorIndex >= 0 && this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column]) {
+    if(this.errorIndex >= 0 && this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column]) {
       return this.errors.advancedErrors.data[this.errorIndex].errMessage
     }
 
   }
-
+  
   getBasicErrors(column: any,index:number) {
     let item
     if(this.basicErrorsList.length) {
       item = this.basicErrorsList.map((element:any) => {
-        if(element.rowNumber == (index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.columnIdentifier[column] == element.columnName) {
+        if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
           return element.errMessage;
         }
       }).filter((element) => element)
@@ -105,7 +103,7 @@ state:any = true;
   isAdvancedError(column: any, ele: any, row:any,index:number) {
     // console.log(index,this.paginator.page,this.paginator.pageIndex,this.paginator.pageSize,this.paginator.pageSizeOptions)
     if(this.errorIndex >= 0) {
-      return this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index+(this.paginator.pageIndex > 0 ? this.paginator.pageIndex*this.paginator.pageSize : 0)) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column];
+      return this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column];
     }
   }
 
@@ -151,7 +149,7 @@ state:any = true;
     
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
-    this.data.paginator = this.paginator;
+    // this.data.paginator = this.paginator;
     this.selectedSheet = s;
 
    this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)
@@ -167,7 +165,6 @@ state:any = true;
     }else{
       return false
     }
-
   }
   export(): void {
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
