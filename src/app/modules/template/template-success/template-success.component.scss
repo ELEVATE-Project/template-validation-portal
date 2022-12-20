@@ -1,12 +1,32 @@
-.success {
-    height: 100%;
-    width: 100%;
-  background: #f7f7f7;
+
+  .success-container{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+  
+  }
+
+.tempplate-card{
+  display: flex;
+ padding: 5%;
+ background-color: #f7f7f7;
+}
+
+.tempplate-section{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  }
+  gap: 20px;
+}
+.export-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 h3 {
     color: #8b0000cc;
     font-weight: bold;
@@ -14,21 +34,6 @@ h3 {
   }
   .success_elevate{
     color: #008000b5;
-  }
-  .template-success{
-    margin-top: 10px;
-    border:6px solid #61ec61b5;
-    border-radius: 30px;
-    background-color: rgb(216, 246, 214)
-  }
-  .template-success >p{
-    margin-top: 12px;
-    padding: 12px;
-    align-items:center;
-    // font-weight: bold
-  }
-  .p1{
-margin-left: 19%;
   }
   
   .explore-button{
@@ -40,4 +45,28 @@ margin-left: 19%;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.15) 3px 6px 3px 0px;
 
+  }
+
+  .shiksha-logo {
+    height: 70px;
+    padding-left: 30px;
+   }
+   .header-container{
+     height: 10%;
+     display: grid;
+     box-shadow: 3px 3px 3px 3px rgb(224, 223, 223);
+     grid-template-columns: 80% 20%;
+  
+   }
+   .log-out{
+     padding-top: 20px;
+     text-align: center;
+     align-items: center;
+  
+   }
+   .export-button {
+    border-radius: 20px;
+    background-color: #008000b5;
+    padding: 0 70px;
+    color: white;
   }

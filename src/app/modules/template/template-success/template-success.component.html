@@ -1,17 +1,29 @@
-<div class="success">
-  <div>
-    <h3>ELE<span class="success_elevate">VA</span>TE</h3>
-  </div>
-  <br />
-  <div class="template-success">
-    <p class="p1">Congrats!!! Template Validation is success</p>
-    <p class="p2">
-      Please contact the support team and raise a ticket with request id=12345
-    </p>
-  </div>
-  <div>
-    <button mat-raised-button class="explore-button">
-      Explore Shikshalokam
-    </button>
-  </div>
+<div class="template-success-container">
+
+  <div class="header-container">
+    <div class="header-image-container"> <img class="shiksha-logo"
+            src="../../../../assets/Images/shikshalokam-logo.png" alt="">
+    </div>
+    <div class="log-out" *ngIf="isUserLogin" (click)="onLogout()">
+        <button mat-raised-button>Logout</button>
+    </div>
+
+</div>
+<div class="success-container">
+<mat-card class="tempplate-card">
+  <mat-card-content class="tempplate-section">
+    <div>
+      <h3>ELE<span class="success_elevate">VA</span>TE</h3>
+    </div>
+    <div class="export-container">
+        <div>
+          <p>Congrats!!! Template Validation is successfull</p>
+        </div>
+          <div>            
+            <button (click)="export()" mat-raised-button class="export-button"> <mat-icon>download</mat-icon> Download excel </button>
+        </div>
+      </div>
+  </mat-card-content>
+</mat-card>
+</div>
 </div>
