@@ -1,4 +1,6 @@
+
 <div class="container">
+   
     <div class="header-container">
         <div class="header-image-container"> <img class="shiksha-logo"
                 src="../../../../assets/Images/shikshalokam-logo.png" alt="">
@@ -8,7 +10,10 @@
         </div>
 
     </div>
-    <div class="template-selection-container">
+    <div *ngIf="loader" class="spinner">
+        <mat-spinner  [diameter]="70"></mat-spinner>
+    </div>
+    <div class="template-selection-container" *ngIf="!loader">
 
         <mat-card class="tempplate-download-card">
             <div class="tempplate-download">
@@ -70,9 +75,8 @@
                         </div>
                     </div>
 
-
+                    <div class="template-fileName"> {{fileName}}</div>
                     <div class="template-upload-button-container">&nbsp;&nbsp;&nbsp;
-                        <div class="template-fileName"> {{fileName}}</div>
                         <button (click)="templateUpload()" mat-raised-button class="upload-button"> Upload </button>
                     </div>
 

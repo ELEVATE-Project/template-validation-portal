@@ -62,3 +62,15 @@ h1{
 }
 
 
+.spinner{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    padding-top: 15%;
+    align-items: center;
+    justify-content: center;
+  }
+  .spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #8b0000;
+  }
+  

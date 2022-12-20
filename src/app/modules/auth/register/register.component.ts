@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   hidepassword: boolean = false;
+  loader:any =false;
   hideconformpassword: boolean = false;
   form: FormGroup = new FormGroup({});
   public registerForm: FormGroup = this.fb.group({
@@ -41,14 +42,16 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm.valid) {
       return;
     }
-
+    this.loader = true;
     this.authService.signup(this.registerForm.value)
       .subscribe((resp: any) => {
+        this.loader = false;
         if (resp?.status === 200) {
           this.toastr.success(resp?.response, 'Success')
           this.router.navigate(['/auth/login'])
         }
       }, (error: any) => {
+        this.loader = false;
         this.toastr.error(error, 'Error')
       })
 
