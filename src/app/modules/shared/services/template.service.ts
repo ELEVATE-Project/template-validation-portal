@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
 @Injectable({
@@ -31,6 +32,22 @@ export class TemplateService {
 
     return this.dataService.post(reqParam);
   }
+
+  getErrorExcelSheet(){
+
+    let templatePath = "/opt/backend/template-validation-portal-service/apiServices/src/main/tmp/Program_Template_latest_Final_--_30_12_2021_(6)1671623565-011165.xlsx"
+    const reqParam = {
+      url: 'errDownload',
+      headers:{
+        "Authorization":localStorage.getItem("token")
+      }
+    }
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("templatePath",templatePath);
+    return this.dataService.get(reqParam,queryParams);
+
+  }
+
 
   validateTemplates(templatePath: any, userUploadedFileType: any) {
     let templateCode = (userUploadedFileType == "program Template") ? "1": "2";
