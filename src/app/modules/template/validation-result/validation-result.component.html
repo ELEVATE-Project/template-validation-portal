@@ -56,18 +56,18 @@
                             <th mat-header-cell *matHeaderCellDef >{{ capitalize(columnName) }}</th>
 
                             <td mat-cell *matCellDef="let row;let i=index;"
-                                [ngClass]="{'selected':isAdvancedError(columnName,row[columnName],row,i),'basic-error':isBasicError(columnName,row[columnName],row,i),'selectedFirstRow':firstRow(i)}">{{ row[columnName] }}
+                                [ngClass]="{'selected':isContainsError(columnName,row[columnName],row,i),'selectedFirstRow':firstRow(i)}">{{ row[columnName] }}
                                 <ng-template #tooltipTemplate>
                                     <div class="close-icon">
                                         <mat-icon class="mat-icon-content-copy" (click)="copyToClipBoard(getErrorsList(columnName,i), getBasicErrors(columnName,i))">content_copy</mat-icon>
                                         <!-- <mat-icon [appCustomTooltip]="tooltipTemplate" class="mat-icon-close">close</mat-icon> -->
                                     </div>
                                     <div>
-                                        <p class="m-4" *ngIf="getErrorsList(columnName,i)">{{getErrorsList(columnName,i)}}</p>
+                                        <p class="m-4" *ngFor="let error of getErrorsList(columnName,i)">{{error}}</p>
                                         <p class="m-4" *ngFor="let error of getBasicErrors(columnName,i)">{{error}}</p>
                                     </div>
                                 </ng-template>
-                                <mat-icon [appCustomTooltip]="tooltipTemplate"  *ngIf="isAdvancedError(columnName,row[columnName],row,i) || isBasicError(columnName,row[columnName],row,i)" class="mat-icon-info">info</mat-icon>
+                                <mat-icon [appCustomTooltip]="tooltipTemplate"  *ngIf="isContainsError(columnName,row[columnName],row,i)" class="mat-icon-info">info</mat-icon>
                             </td>
 
                         </div>

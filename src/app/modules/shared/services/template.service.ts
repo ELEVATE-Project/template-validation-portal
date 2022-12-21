@@ -28,7 +28,7 @@ export class TemplateService {
       },
       data: formData
     }
-    
+
     return this.dataService.post(reqParam);
   }
 
@@ -40,8 +40,10 @@ export class TemplateService {
         "Authorization":localStorage.getItem("token")
       },
       data: {
-        "templatePath": templatePath,
-        "templateCode": templateCode
+        request: {
+          "templatePath": templatePath,
+          "templateCode": templateCode
+        }
       }
     }
     return this.dataService.post(reqParam);
