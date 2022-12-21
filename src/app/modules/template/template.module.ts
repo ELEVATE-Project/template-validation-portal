@@ -9,6 +9,7 @@ import { TemplateReportComponent } from './template-report/template-report.compo
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CustomTooltipDirective } from '../shared/directives/custom-tooltip.directive';
 import { SharedModule } from '../shared/shared.module';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     TemplateRoutingModule,
     MatTooltipModule,
-    SharedModule
+    SharedModule,
+    OverlayModule
   ]
 })
 export class TemplateModule { }

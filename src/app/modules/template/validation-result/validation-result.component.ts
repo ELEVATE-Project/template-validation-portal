@@ -6,6 +6,9 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplateService } from '../../shared/services/template.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { TableCellErrorDialogsComponent } from '../../shared/dialogs/table-cell-error-dialogs/table-cell-error-dialogs.component';
 
 type AOA = any[][];
 @Component({
@@ -38,7 +41,7 @@ export class ValidationResultComponent implements OnInit {
   columnIdentifier:any;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute,private toastr: ToastrService,public dialog: MatDialog, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
 
   /**
    * Set the paginator after the view init since this component will
@@ -53,6 +56,16 @@ export class ValidationResultComponent implements OnInit {
     this.isUserLogin = this.authService.isUserLoggedIn();
   }
 
+  copyToClipBoard(error1:any,error2:any) {
+    navigator.clipboard.writeText(error1 ? error1 : '' +error2 ? error2 : '').then(() => {
+      this.toastr.success('Error copied successfully.','Success')
+      /* Resolved - text copied to clipboard successfully */
+    },() => {
+      console.error('Failed to copy');
+      /* Rejected - text failed to copy to the clipboard */
+    });
+  }
+
   capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
@@ -61,6 +74,21 @@ export class ValidationResultComponent implements OnInit {
     this.isUserLogin = false;
     this.router.navigate(['/auth/login'])
   }
+
+  getOpenStatus(status?:boolean) {
+    return status ? !status : false;
+  }
+
+  openDialog(error1:any,error2:any) {
+    const dialogRef = this.dialog.open(TableCellErrorDialogsComponent, {
+      data: {content:error1 ? error1 : '' +error2 ? error2 : ''},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   onFileChange(evt: any) {
     // const target: DataTransfer = <DataTransfer>evt.target;
     const target: DataTransfer = <DataTransfer>evt;
