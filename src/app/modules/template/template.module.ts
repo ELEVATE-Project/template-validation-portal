@@ -9,8 +9,8 @@ import { TemplateReportComponent } from './template-report/template-report.compo
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CustomTooltipDirective } from '../shared/directives/custom-tooltip.directive';
 import { SharedModule } from '../shared/shared.module';
-import {OverlayModule} from '@angular/cdk/overlay';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     TemplateRoutingModule,
     MatTooltipModule,
     SharedModule,
-    OverlayModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ]
 })
 export class TemplateModule { }

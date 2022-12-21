@@ -5,6 +5,7 @@
  .header-container{
    height: 10%;
    display: grid;
+   box-shadow: 3px 3px 3px 3px rgb(224, 223, 223);
    grid-template-columns: 80% 20%;
 
  }
@@ -24,7 +25,14 @@
 .export_div {
   padding-bottom: 20px;
 }
-
+.validation-result{
+  padding-top:2%;
+  padding-left: 2%;
+  width: 250px;
+  font-size: large;
+  font-weight: 500;
+  color: #8b0000;
+}
 .tempplate-download {
   width: 12%;
   height: 40px;
@@ -80,19 +88,19 @@
   padding: 0 83px;
   color: white;
 }
-::ng-deep .mat-select-panel-wrap {
-  position: absolute;
-  top: 46px !important;
-}
+// ::ng-deep .mat-select-panel-wrap {
+//   position: absolute;
+//   top: 46px !important;
+// }
 
 .select-opt {
   border-radius: 20px;
   border: 1px solid grey;
 }
-::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
-  box-shadow: 0px 0px 0px 0px;
-  margin-left: -20px;
-}
+// ::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
+//   box-shadow: 0px 0px 0px 0px;
+//   margin-left: -20px;
+// }
 
 
 // ................................................................................
@@ -117,6 +125,7 @@ table {
   th {
     text-align: right;
     padding: 8px;
+    color: green;
   }
   td {
     padding: 8px;
@@ -135,6 +144,14 @@ table {
 padding-right: 20px;
 }
 
+::ng-deep .mat-header-cell{
+  color:#a8a8a8;
+  font-style: italic;
+  font-size:10px;
+  font-weight: 300;
+}
+
+
 .arrayOfSheet{
   border: solid 1px #bcb7b7;
   border-radius: 20px;
@@ -152,7 +169,7 @@ padding-right: 20px;
   font-size: 14px;
   min-height: 48px;
   text-align: center;
-  border-right: 1px solid #bcb7b7;
+  border-right: 1px solid #b8b4b4;
 }
 // ----------------------------------------------------------------------------------
 
@@ -162,8 +179,8 @@ padding-right: 20px;
   color:red
 }
 .basic-error {
-  border:1px solid brown ;
-  color:brown;
+  border:1px solid red ;
+  color:red
 }
 
 .m-4 {
@@ -189,7 +206,16 @@ padding-right: 20px;
   padding-right: 10px;
 }
 
+.selectedFirstRow{
+  color:rgb(0, 0, 0);
+  font-weight: 500;
+}
 
 // ::ng-deep  .selected[_ngcontent-cci-c156] {
 //   border: 1px solid red;
 // }
+
+.active{
+  background-color:#8b0000;
+  color: white;
+}

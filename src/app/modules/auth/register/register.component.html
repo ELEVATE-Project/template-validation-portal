@@ -1,4 +1,8 @@
-<div class="register">
+<div *ngIf="loader" class="spinner">
+  <mat-spinner  [diameter]="70"></mat-spinner>
+</div>
+
+<div class="register" *ngIf="!loader">
   <div>
     <h1>ELE<span class="login_elevate">VA</span>TE</h1>
   </div><br>
