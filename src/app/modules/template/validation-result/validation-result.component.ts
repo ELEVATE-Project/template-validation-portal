@@ -225,7 +225,13 @@ state:any = true;
   export(): void {
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }
+  errorExcelDownload(){
 
+    this.templateService.getErrorExcelSheet().subscribe((data:any) => {
+      console.log(data)
+      XLSX.writeFile(data, `$file.xlsx`);
+    })
+  }
 
 
 }
