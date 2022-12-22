@@ -157,7 +157,6 @@ state:any = true;
     if(this.advancedErrorList.length || this.basicErrorsList.length) {
       const advancedErrors:any = this.advancedErrorList.find((element:any) => (Array.isArray(element.rowNumber) ? element.rowNumber.includes(index) : element.rowNumber == index) && this.columnIdentifier[column] == element.columnName)
       const basicErrors:any = this.basicErrorsList.find((element:any) => (Array.isArray(element.rowNumber) ? element.rowNumber.includes(index) : element.rowNumber == index) && this.columnIdentifier[column] == element.columnName)
-      debugger;
       return advancedErrors || basicErrors ? true : false;
     }
     else {
@@ -213,7 +212,6 @@ state:any = true;
    this.advancedErrorList = this.errors.advancedErrors.data.filter((item:any) => item.sheetName == this.selectedSheet)
    this.basicErrorsList = this.errors.basicErrors.data.filter((item:any) => item.sheetName == this.selectedSheet);
    this.rowErrorsList = [...this.basicErrorsList.filter((element:any) => element.columnName.length == 0),...this.advancedErrorList.filter((element:any) => element.columnName.length == 0)]
-   debugger;
   }
   firstRow(index:any){
     if(index == 0){
@@ -226,11 +224,7 @@ state:any = true;
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }
   errorExcelDownload(){
-
-    this.templateService.getErrorExcelSheet().subscribe((data:any) => {
-      console.log(data)
-      XLSX.writeFile(data, `$file.xlsx`);
-    })
+    window.open(this.errors.errFileLink,'_blank');
   }
 
 
