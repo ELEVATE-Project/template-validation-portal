@@ -60,24 +60,24 @@ export class CustomTooltipDirective implements OnInit {
     }
   }
 
-  @HostListener('mouseenter')
-  private _show(): void {
-    // if overlay element exists
-    // if (this._overlayRef) {
-    //   let containerPortal: TemplatePortal<any> | ComponentPortal<any>;
+  // @HostListener('mouseenter')
+  // private _show(): void {
+  //   // if overlay element exists
+  //   if (this._overlayRef) {
+  //     let containerPortal: TemplatePortal<any> | ComponentPortal<any>;
 
-    //   // cretae template
-    //   if (this.tooltipContent instanceof TemplateRef) {
-    //     containerPortal = new TemplatePortal(this.tooltipContent, this.viewContainerRef);
-    //   }
-    //   else {
-    //     containerPortal = new ComponentPortal(this.tooltipContent, this.viewContainerRef);
-    //   }
+  //     // cretae template
+  //     if (this.tooltipContent instanceof TemplateRef) {
+  //       containerPortal = new TemplatePortal(this.tooltipContent, this.viewContainerRef);
+  //     }
+  //     else {
+  //       containerPortal = new ComponentPortal(this.tooltipContent, this.viewContainerRef);
+  //     }
 
-    //   // all the element to overlay ref
-    //   this._overlayRef.attach(containerPortal);
-    // }
-  }
+  //     // all the element to overlay ref
+  //     this._overlayRef.attach(containerPortal);
+  //   }
+  // }
 
   @HostListener('click',['$event'])
 
