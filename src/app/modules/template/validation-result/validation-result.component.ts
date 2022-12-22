@@ -6,6 +6,9 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplateService } from '../../shared/services/template.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { TableCellErrorDialogsComponent } from '../../shared/dialogs/table-cell-error-dialogs/table-cell-error-dialogs.component';
 
 type AOA = any[][];
 @Component({
@@ -24,8 +27,9 @@ export class ValidationResultComponent implements OnInit {
   sheetarr: any;
   wsname: any;
   wbfile: any;
-  errorIndex:number = -1;
+  advancedErrorList:Array<Object> = [];
   basicErrorsList:Array<Object> = [];
+  rowErrorsList:Array<Object> = [];
   a: any;
   fileName: string = 'SheetJS.xlsx';
   errors: any
@@ -36,7 +40,7 @@ export class ValidationResultComponent implements OnInit {
   statusClass:any ='not-active';
 state:any = true;
 
-  constructor(private route: ActivatedRoute, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute,private toastr: ToastrService,public dialog: MatDialog, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
 
 
   /**
@@ -44,11 +48,21 @@ state:any = true;
    * be able to query its view for the initialized paginator.
    */
   ngOnInit(): void {
-  
+
    this.errors = this.templateService.templateError
     this.onFileChange(this.templateService.templateFile)
     this.isUserLogin = this.authService.isUserLoggedIn();
 
+  }
+
+  copyToClipBoard(error1:any,error2:any) {
+    navigator.clipboard.writeText(error1 ? error1 : '' +error2 ? error2 : '').then(() => {
+      this.toastr.success('Error copied successfully.','Success')
+      /* Resolved - text copied to clipboard successfully */
+    },() => {
+      console.error('Failed to copy');
+      /* Rejected - text failed to copy to the clipboard */
+    });
   }
 
   capitalize(s: string): string {
@@ -59,6 +73,21 @@ state:any = true;
     this.isUserLogin = false;
     this.router.navigate(['/auth/login'])
   }
+
+  getOpenStatus(status?:boolean) {
+    return status ? !status : false;
+  }
+
+  openDialog(error1:any,error2:any) {
+    const dialogRef = this.dialog.open(TableCellErrorDialogsComponent, {
+      data: {content:error1 ? error1 : '' +error2 ? error2 : ''},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   onFileChange(evt: any) {
     if(!this.errors){
       this.router.navigate(['/template/template-selection'])
@@ -68,42 +97,70 @@ state:any = true;
     const reader: FileReader = new FileReader();
 
     this.readFile(target, reader).subscribe((output) => { });
-    
-  }
 
-
-  isBasicError(column: any, ele: any, row:any,index:number) {
-    if(this.basicErrorsList.length) {
-      return (this.basicErrorsList.find((element:any) => element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) ? true : false)
-    }
-    else {
-      return false;
-    }
   }
 
   getErrorsList(column: any,index:number) {
-
-    if(this.errorIndex >= 0 && this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column]) {
-      return this.errors.advancedErrors.data[this.errorIndex].errMessage
-    }
-
-  }
-  
-  getBasicErrors(column: any,index:number) {
     let item
-    if(this.basicErrorsList.length) {
-      item = this.basicErrorsList.map((element:any) => {
+    if(this.advancedErrorList.length) {
+      item = this.advancedErrorList.map((element:any) => {
         if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
+          return element.errMessage;
+        }
+        else if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index) && this.columnIdentifier[column] == element.columnName) {
           return element.errMessage;
         }
       }).filter((element) => element)
     }
     return item
   }
-  isAdvancedError(column: any, ele: any, row:any,index:number) {
-    // console.log(index,this.paginator.page,this.paginator.pageIndex,this.paginator.pageSize,this.paginator.pageSizeOptions)
-    if(this.errorIndex >= 0) {
-      return this.errors.advancedErrors.data[this.errorIndex].rowNumber.includes(index) && this.errors.advancedErrors.data[this.errorIndex].columnName == this.columnIdentifier[column];
+
+  getBasicErrors(column: any,index:number) {
+    let item:any = [];
+    if(this.basicErrorsList.length) {
+      item = this.basicErrorsList.map((element:any) => {
+        if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
+          return element.errMessage;
+        }
+        else if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index) && this.columnIdentifier[column] == element.columnName) {
+          return element.errMessage;
+        }
+      }).filter((element) => element)
+    }
+    if(this.rowErrorsList.length > 0) {
+      this.rowErrorsList.forEach((element:any) => {
+        if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index)) {
+          item.push(element.errMessage)
+        }
+        else if (element.rowNumber == index) {
+          item.push(element.errMessage)
+        }
+      })
+    }
+    return item
+  }
+
+  isContainsError(column: any, ele: any, row:any,index:number) {
+    if(this.rowErrorsList.length > 0) {
+      let item =this.rowErrorsList.find((element:any) => {
+        if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index)) {
+          return element
+        }
+        else if (element.rowNumber == index) {
+          return element
+        }
+      })
+      if(item) {
+        return true;
+      }
+    }
+    if(this.advancedErrorList.length || this.basicErrorsList.length) {
+      const advancedErrors:any = this.advancedErrorList.find((element:any) => (Array.isArray(element.rowNumber) ? element.rowNumber.includes(index) : element.rowNumber == index) && this.columnIdentifier[column] == element.columnName)
+      const basicErrors:any = this.basicErrorsList.find((element:any) => (Array.isArray(element.rowNumber) ? element.rowNumber.includes(index) : element.rowNumber == index) && this.columnIdentifier[column] == element.columnName)
+      return advancedErrors || basicErrors ? true : false;
+    }
+    else {
+      return false;
     }
   }
 
@@ -127,7 +184,7 @@ state:any = true;
     };
 
     reader.readAsBinaryString(target.files[0]);
-    
+
     return sub.asObservable();
   }
   isSlectedSheet(s: any){
@@ -136,31 +193,28 @@ state:any = true;
     }else{
       return false
     }
-  
-   
+
+
   }
   onClickSheetName(s: any) {
-  
+
     const wsname: string = s;
     const ws: XLSX.WorkSheet = this.wbfile.Sheets[wsname];
     const data: any = XLSX.utils.sheet_to_json(ws);
     this.headers = data[0]
     this.columnIdentifier = data[0]
-    
+
     this.columnNames = Object.keys(data[0]);
     this.data = new MatTableDataSource(data);
     // this.data.paginator = this.paginator;
     this.selectedSheet = s;
 
-   this.errorIndex = this.errors.advancedErrors.data.findIndex((item:any) => item.sheetName == this.selectedSheet)
+   this.advancedErrorList = this.errors.advancedErrors.data.filter((item:any) => item.sheetName == this.selectedSheet)
    this.basicErrorsList = this.errors.basicErrors.data.filter((item:any) => item.sheetName == this.selectedSheet);
-  
-
-    // console.log(this.errorIndex);
+   this.rowErrorsList = [...this.basicErrorsList.filter((element:any) => element.columnName.length == 0),...this.advancedErrorList.filter((element:any) => element.columnName.length == 0)]
   }
   firstRow(index:any){
     if(index == 0){
-      console.log(index)
       return true
     }else{
       return false
@@ -169,7 +223,9 @@ state:any = true;
   export(): void {
     XLSX.writeFile(this.wbfile, `$file.xlsx`);
   }
-
+  errorExcelDownload(){
+    window.open(this.errors.errFileLink,'_blank');
+  }
 
 
 }

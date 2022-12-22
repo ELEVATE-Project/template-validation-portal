@@ -60,10 +60,30 @@ export class CustomTooltipDirective implements OnInit {
     }
   }
 
-  @HostListener('mouseenter')
-  private _show(): void {
-    // if overlay element exists
-    if (this._overlayRef) {
+  // @HostListener('mouseenter')
+  // private _show(): void {
+  //   // if overlay element exists
+  //   if (this._overlayRef) {
+  //     let containerPortal: TemplatePortal<any> | ComponentPortal<any>;
+
+  //     // cretae template
+  //     if (this.tooltipContent instanceof TemplateRef) {
+  //       containerPortal = new TemplatePortal(this.tooltipContent, this.viewContainerRef);
+  //     }
+  //     else {
+  //       containerPortal = new ComponentPortal(this.tooltipContent, this.viewContainerRef);
+  //     }
+
+  //     // all the element to overlay ref
+  //     this._overlayRef.attach(containerPortal);
+  //   }
+  // }
+
+  @HostListener('click',['$event'])
+
+  openError(event:any):void {
+    console.log(event)
+    if (this._overlayRef && !this._overlayRef.hasAttached()) {
       let containerPortal: TemplatePortal<any> | ComponentPortal<any>;
 
       // cretae template
@@ -77,14 +97,31 @@ export class CustomTooltipDirective implements OnInit {
       // all the element to overlay ref
       this._overlayRef.attach(containerPortal);
     }
-  }
-
-  @HostListener('mouseout')
-  private _hide(): void {
-    // to un overlay element
-    if (this._overlayRef) {
-      this._overlayRef.detach();
+    else {
+      // to un overlay element
+      if (this._overlayRef && this._overlayRef.hasAttached()) {
+        this._overlayRef.detach();
+      }
     }
   }
+
+  // @HostListener('click')
+
+  // closeError():void {
+  //   // to un overlay element
+  //   if (this._overlayRef) {
+  //     this._overlayRef.detach();
+  //   }
+  // }
+
+  // @HostListener('mouseout')
+  // private _hide(): void {
+  //   // to un overlay element
+  //   if (this._overlayRef) {
+  //     this._overlayRef.detach();
+  //   }
+  // }
+
+
 
 }

@@ -8,7 +8,7 @@
         </div>
 
     </div>
- 
+
     <div class="validation-result">
         <p class="validation-sections">Validation Result</p>
     </div>
@@ -20,13 +20,13 @@
         <div class="flex-container">
             <div class="download_div">
                 <div class="export_div">
-                    
+
                     <button (click)="export()" mat-raised-button class="export-button"> <mat-icon>download</mat-icon> Export excel </button>
 
                 </div>
                 <div class="export_div">
-                    
-                    <button mat-raised-button class="export-button"> <mat-icon>download</mat-icon> Export errors </button>
+
+                    <button mat-raised-button class="export-button" (click)="errorExcelDownload()"> <mat-icon>download</mat-icon> Export errors </button>
 
                 </div>
                 <!-- <div>
@@ -55,14 +55,19 @@
                         <div>
                             <th mat-header-cell *matHeaderCellDef >{{ capitalize(columnName) }}</th>
 
-                            <td mat-cell *matCellDef="let row;let i=index;" [appCustomTooltip]="tooltipTemplate"
-                                [ngClass]="{'selected':isAdvancedError(columnName,row[columnName],row,i),'basic-error':isBasicError(columnName,row[columnName],row,i), 'selectedFirstRow':firstRow(i)}">{{ row[columnName] }}
+                            <td mat-cell *matCellDef="let row;let i=index;"
+                                [ngClass]="{'selected':isContainsError(columnName,row[columnName],row,i),'selectedFirstRow':firstRow(i)}">{{ row[columnName] }}
                                 <ng-template #tooltipTemplate>
+                                    <div class="close-icon">
+                                        <mat-icon class="mat-icon-content-copy" (click)="copyToClipBoard(getErrorsList(columnName,i), getBasicErrors(columnName,i))">content_copy</mat-icon>
+                                        <!-- <mat-icon [appCustomTooltip]="tooltipTemplate" class="mat-icon-close">close</mat-icon> -->
+                                    </div>
                                     <div>
-                                        <p class="m-4" *ngIf="getErrorsList(columnName,i)">{{getErrorsList(columnName,i)}}</p>
+                                        <p class="m-4" *ngFor="let error of getErrorsList(columnName,i)">{{error}}</p>
                                         <p class="m-4" *ngFor="let error of getBasicErrors(columnName,i)">{{error}}</p>
                                     </div>
                                 </ng-template>
+                                <mat-icon [appCustomTooltip]="tooltipTemplate"  *ngIf="isContainsError(columnName,row[columnName],row,i)" class="mat-icon-info">info</mat-icon>
                             </td>
 
                         </div>
