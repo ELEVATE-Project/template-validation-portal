@@ -50,7 +50,16 @@ export class TemplateService {
 
 
   validateTemplates(templatePath: any, userUploadedFileType: any) {
-    let templateCode = (userUploadedFileType == "program Template") ? "1": "2";
+    let templateCode
+    if(userUploadedFileType == "program Template"){
+      templateCode = "1"
+    }else if(userUploadedFileType == "project Template"){
+      templateCode = "2"
+    }else if(userUploadedFileType == "survey Template"){
+       templateCode = "3"
+    }else{
+       templateCode = "4"
+    }
     const reqParam = {
       url: 'validate',
       headers:{
