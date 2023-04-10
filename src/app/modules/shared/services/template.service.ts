@@ -53,7 +53,7 @@ export class TemplateService {
     let templateCode
     if(userUploadedFileType == "program Template"){
       templateCode = "1"
-    }else if(userUploadedFileType == "project Template"){
+    }else if(userUploadedFileType == "projects Template"){
       templateCode = "2"
     }else if(userUploadedFileType == "survey Template"){
        templateCode = "3"
