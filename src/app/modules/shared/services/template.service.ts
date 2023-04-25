@@ -49,17 +49,15 @@ export class TemplateService {
   }
 
 
-  validateTemplates(templatePath: any, userUploadedFileType: any) {
+  validateTemplates(templatePath: any, userUploadedFileType: any, templateLinks:any) {
     let templateCode
-    if(userUploadedFileType == "program Template"){
-      templateCode = "1"
-    }else if(userUploadedFileType == "projects Template"){
-      templateCode = "2"
-    }else if(userUploadedFileType == "survey Template"){
-       templateCode = "3"
-    }else{
-       templateCode = "4"
-    }
+    templateLinks.forEach((templates:any) => {
+      let templateName: any = (templates.templateName.split(/(?=[A-Z])/)).join(" ")
+      if(userUploadedFileType == templateName){
+        templateCode = templates?.templateCode;
+      }
+    });
+   
     const reqParam = {
       url: 'validate',
       headers:{
@@ -68,7 +66,7 @@ export class TemplateService {
       data: {
         request: {
           "templatePath": templatePath,
-          "templateCode": templateCode
+          "templateCode": JSON.stringify(templateCode) 
         }
       }
     }
