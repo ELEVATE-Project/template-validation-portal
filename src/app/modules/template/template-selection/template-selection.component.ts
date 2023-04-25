@@ -16,6 +16,7 @@ export class TemplateSelectionComponent implements OnInit {
   loader:any = false;
   userSelectedFile: any;
   userUploadedFileType: any;
+  templateLinks:any;
   public downloadTemplates: any = [
 
   ];
@@ -37,6 +38,8 @@ export class TemplateSelectionComponent implements OnInit {
     history.pushState(null,'', window.location.href);
     this.templateService.selectTemplates()
       .subscribe((resp: any) => {
+
+        this.templateLinks = resp.result.templateLinks
         resp.result.templateLinks.forEach((data: any) => {
           let templateName: any = (data.templateName.split(/(?=[A-Z])/)).join(" ")
           let template: any = { "name": templateName, "templateLink": data.templateLink }
@@ -63,7 +66,7 @@ export class TemplateSelectionComponent implements OnInit {
     this.loader = true
     if (this.userSelectedFile) {
       this.templateService.uploadTemplates(this.userSelectedFile).subscribe((event: any) => {
-        this.templateService.validateTemplates(event.result.templatePath, this.userUploadedFileType).subscribe((data) => {
+        this.templateService.validateTemplates(event.result.templatePath, this.userUploadedFileType, this.templateLinks).subscribe((data) => {
           
           this.loader = false
           if(!data.result.advancedErrors && !data.result.basicErrors){
