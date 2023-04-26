@@ -8,6 +8,7 @@ import { TemplateService } from '../../shared/services/template.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { Location } from '@angular/common';
 import { TableCellErrorDialogsComponent } from '../../shared/dialogs/table-cell-error-dialogs/table-cell-error-dialogs.component';
 
 type AOA = any[][];
@@ -40,7 +41,7 @@ export class ValidationResultComponent implements OnInit {
   statusClass:any ='not-active';
 state:any = true;
 
-  constructor(private route: ActivatedRoute,private toastr: ToastrService,public dialog: MatDialog, private router: Router, private templateService: TemplateService, private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute,private toastr: ToastrService,public dialog: MatDialog, private router: Router, private templateService: TemplateService, private authService: AuthenticationService,private _location: Location) { }
 
 
   /**
@@ -72,6 +73,7 @@ state:any = true;
     this.authService.logoutAccount();
     this.isUserLogin = false;
     this.router.navigate(['/auth/login'])
+    window.location.reload();
   }
 
   getOpenStatus(status?:boolean) {
@@ -225,6 +227,10 @@ state:any = true;
   }
   errorExcelDownload(){
     window.open(this.errors.errFileLink,'_blank');
+  }
+
+  goBack() {
+    this._location.back();
   }
 
 

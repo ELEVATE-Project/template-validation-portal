@@ -11,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: '', redirectTo: 'auth',pathMatch:'full'
+  },
+  {
+    path: '**', redirectTo: 'auth',pathMatch:'full'
   }
 ];
 
