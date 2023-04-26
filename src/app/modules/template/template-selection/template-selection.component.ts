@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { TemplateService } from '../../shared/services/template.service';
 import { Router , NavigationExtras} from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-template-selection',
@@ -23,7 +24,7 @@ export class TemplateSelectionComponent implements OnInit {
   uploadTemplates: any = [];
   isUserLogin:any = false;
   public sortableElement: string = 'Uploads';
-  constructor(private templateService: TemplateService,private router: Router, private authService:AuthenticationService) { }
+  constructor(private templateService: TemplateService,private router: Router, private authService:AuthenticationService, private toaster:ToastrService) { }
   @HostListener('window:popstate', ['$event'])
   onPopState(event:any) {
     window.location.hash = "dontgoback";
@@ -34,7 +35,7 @@ export class TemplateSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+
     history.pushState(null,'', window.location.href);
     this.templateService.selectTemplates()
       .subscribe((resp: any) => {
@@ -47,8 +48,8 @@ export class TemplateSelectionComponent implements OnInit {
           this.downloadTemplates.push(template)
         });
       }, (error: any) => {
-      }) 
-      this.isUserLogin = this.authService.isUserLoggedIn();  
+      })
+      this.isUserLogin = this.authService.isUserLoggedIn();
   }
   onCickSelectedTemplate(selectedTemplate: any) {
     this.selectedFile = selectedTemplate;
@@ -56,7 +57,7 @@ export class TemplateSelectionComponent implements OnInit {
   setSortableElement($event: string) {
     this.sortableElement = $event;
   }
-  
+
   templateDownload() {
     const url = this.selectedFile.templateLink;
     let capturedId = url.match(/\/d\/(.+)\//);
@@ -67,16 +68,16 @@ export class TemplateSelectionComponent implements OnInit {
     if (this.userSelectedFile) {
       this.templateService.uploadTemplates(this.userSelectedFile).subscribe((event: any) => {
         this.templateService.validateTemplates(event.result.templatePath, this.userUploadedFileType, this.templateLinks).subscribe((data) => {
-          
+
           this.loader = false
           if(!data.result.advancedErrors && !data.result.basicErrors){
             this.router.navigate(['/template/template-success'])
           }else{
-            
-            this.templateService.templateError=data.result;  
+
+            this.templateService.templateError=data.result;
             this.router.navigate(['/template/validation-result'])
           }
-         
+
 
         }, (error: any) => {
         this.loader = false; })
@@ -97,9 +98,15 @@ export class TemplateSelectionComponent implements OnInit {
     this.router.navigate(['/auth/login'])
   }
   getFileDetails(event: any) {
-    for (var i = 0; i < event.target.files.length; i++) {
-      this.fileName = event.target.files[i].name;
+    if(event.target.files[0].type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      for (var i = 0; i < event.target.files.length; i++) {
+        this.fileName = event.target.files[i].name;
+      }
     }
+    else {
+      this.toaster.error('Please upload valid file format','Validation')
+    }
+
   }
 }
 
