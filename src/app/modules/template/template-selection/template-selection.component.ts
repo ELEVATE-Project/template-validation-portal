@@ -98,7 +98,6 @@ export class TemplateSelectionComponent implements OnInit {
     this.router.navigate(['/auth/login'])
   }
   getFileDetails(event: any) {
-    debugger;
     if(event.target.files[0].type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
       for (var i = 0; i < event.target.files.length; i++) {
         this.fileName = event.target.files[i].name;
