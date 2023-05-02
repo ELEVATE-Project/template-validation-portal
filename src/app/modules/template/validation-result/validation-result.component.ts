@@ -105,9 +105,9 @@ state:any = true;
   getErrorsList(column: any,index:number): any {
     let item
     if(this.advancedErrorList.length) {
-      item = this.advancedErrorList.map((element:any) => {
+      item = this.advancedErrorList.map((element:any) :any => {
         if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
-          return {error:element.errMessage,suggestion:element.suggestion};
+          return {error:element.errMessage,suggestion:element.suggestion} ;
         }
         else if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index) && this.columnIdentifier[column] == element.columnName) {
           return {error:element.errMessage,suggestion:element.suggestion};
@@ -120,7 +120,7 @@ state:any = true;
   getBasicErrors(column: any,index:number) {
     let item:any = [];
     if(this.basicErrorsList.length) {
-      item = this.basicErrorsList.map((element:any) => {
+      item = this.basicErrorsList.map((element:any):any => {
         if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
           return {error:element.errMessage,suggestion:element.suggestion};
         }
