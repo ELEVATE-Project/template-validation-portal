@@ -102,15 +102,15 @@ state:any = true;
 
   }
 
-  getErrorsList(column: any,index:number) {
+  getErrorsList(column: any,index:number): any {
     let item
     if(this.advancedErrorList.length) {
       item = this.advancedErrorList.map((element:any) => {
         if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
-          return element.errMessage;
+          return {error:element.errMessage,suggestion:element.suggestion};
         }
         else if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index) && this.columnIdentifier[column] == element.columnName) {
-          return element.errMessage;
+          return {error:element.errMessage,suggestion:element.suggestion};
         }
       }).filter((element) => element)
     }
@@ -122,20 +122,20 @@ state:any = true;
     if(this.basicErrorsList.length) {
       item = this.basicErrorsList.map((element:any) => {
         if(element.rowNumber == (index) && this.columnIdentifier[column] == element.columnName) {
-          return element.errMessage;
+          return {error:element.errMessage,suggestion:element.suggestion};
         }
         else if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index) && this.columnIdentifier[column] == element.columnName) {
-          return element.errMessage;
+          return {error:element.errMessage,suggestion:element.suggestion};
         }
       }).filter((element) => element)
     }
     if(this.rowErrorsList.length > 0) {
       this.rowErrorsList.forEach((element:any) => {
         if(Array.isArray(element.rowNumber) && element.rowNumber.includes(index)) {
-          item.push(element.errMessage)
+          item.push({error:element.errMessage,suggestion:element.suggestion})
         }
         else if (element.rowNumber == index) {
-          item.push(element.errMessage)
+          item.push({error:element.errMessage,suggestion:element.suggestion})
         }
       })
     }

@@ -66,8 +66,14 @@
                                         <!-- <mat-icon [appCustomTooltip]="tooltipTemplate" class="mat-icon-close">close</mat-icon> -->
                                     </div>
                                     <div>
-                                        <p class="m-4" *ngFor="let error of getErrorsList(columnName,i)">{{error}}</p>
-                                        <p class="m-4" *ngFor="let error of getBasicErrors(columnName,i)">{{error}}</p>
+                                        <div *ngFor="let error of getErrorsList(columnName,i)">
+                                            <p class="m-4">Error : {{error.error}}</p>
+                                            <p class="m-4">Suggestions : {{error.suggestion}}</p>
+                                        </div>
+                                        <div *ngFor="let error of getBasicErrors(columnName,i)">
+                                            <p class="m-4">Error : {{error.error}}</p>
+                                            <p class="m-4">Suggestions : {{error.suggestion}}</p>
+                                        </div>
                                     </div>
                                 </ng-template>
                                 <mat-icon [appCustomTooltip]="tooltipTemplate"  *ngIf="isContainsError(columnName,row[columnName],row,i)" class="mat-icon-info">info</mat-icon>
