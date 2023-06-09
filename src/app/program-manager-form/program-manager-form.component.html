@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()">
+    <label for="ssoUser">If the user is using SSO system to login, select YES else NO</label>
+    <select id="ssoUser" [(ngModel)]="ssoUser" name="ssoUser" required>
+      <option value="YES">YES</option>
+      <option value="NO">NO</option>
+    </select>
+  
+    <label for="loginId">Login Id on DIKSHA of the Program Manager</label>
+    <input id="loginId" [(ngModel)]="loginId" name="loginId" [disabled]="ssoUser === 'YES'">
+  
+    <label for="dikshaUserId">Enter the Diksha username/user id</label>
+    <input id="dikshaUserId" [(ngModel)]="dikshaUserId" name="dikshaUserId" [required]="ssoUser === 'YES'">
+  
+    <button type="submit">Submit</button>
+  </form>
+  
